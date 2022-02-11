@@ -1,5 +1,5 @@
 import React from 'react'
-import { GlobalStyles } from 'styles/global-styles'
+import { GlobalStyles } from 'presentation/styles/global-styles'
 
 function App() {
 	return (
