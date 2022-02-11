@@ -1,9 +1,10 @@
 import React from 'react'
 import Logo from 'presentation/shared/assets/icons/logo.svg'
-import Search from 'presentation/shared/assets/icons/ic_busca.svg'
+
 import { Text } from '../Text'
 
 import * as S from './styles'
+import { SearchForm } from '../forms/Search'
 
 export const Header = () => {
 	return (
@@ -22,12 +23,9 @@ export const Header = () => {
 					Mergulhe no domínio deslumbrante de todos os personagens clássicos que
 					você ama - e aqueles que você descubrirá em breve!
 				</Text>
-			</div>
 
-			<S.Input>
-				<img src={String(Search)} alt="Icone de Lupa em vermelho" />
-				<input type="text" placeholder="Procure por heróis" />
-			</S.Input>
+				<SearchForm />
+			</div>
 		</S.Wrapper>
 	)
 }
