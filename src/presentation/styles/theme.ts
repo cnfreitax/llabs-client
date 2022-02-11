@@ -3,6 +3,7 @@ export default {
 		radius: {
 			small: '10px',
 			medium: '15px',
+			inputRound: '25px',
 			large: '20px',
 			rounded: '50%'
 		}
@@ -28,7 +29,9 @@ export default {
 		}
 	},
 	colors: {
-		primary: '#ff0000'
+		primary: '#ff0000',
+		gray: '#4A4A4A',
+		lightRed: '#ff00001c'
 	},
 	transition: {
 		default: '0.3s ease-in-out',
