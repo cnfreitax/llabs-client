@@ -18,6 +18,7 @@ export type ButtonProps = {
 	variant?: 'text'
 	icon?: JSX.Element
 	active?: boolean
+	noPadding?: boolean
 } & ButtonTypes
 
 const Button: ForwardRefRenderFunction<S.WrapperProps, ButtonProps> = (

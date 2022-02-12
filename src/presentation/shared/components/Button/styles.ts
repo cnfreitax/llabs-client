@@ -2,7 +2,10 @@ import styled, { css, DefaultTheme } from 'styled-components'
 
 import { ButtonProps } from '.'
 
-export type WrapperProps = Pick<ButtonProps, 'active' | 'fullWidth' | 'variant'>
+export type WrapperProps = Pick<
+	ButtonProps,
+	'active' | 'fullWidth' | 'variant' | 'noPadding'
+>
 const wrapperModifiers = {
 	fullWidth: () => css`
 		width: 100%;
@@ -20,10 +23,10 @@ const wrapperModifiers = {
 }
 
 export const Wrapper = styled.button<WrapperProps>`
-	${({ theme, fullWidth, disabled, variant }) => css`
+	${({ theme, fullWidth, disabled, variant, noPadding }) => css`
 		display: inline-flex;
 		align-items: center;
-		padding: 0 20px;
+		padding: ${noPadding ? 0 : '20px'};
 		justify-content: space-between;
 		font-family: ${theme.font.family};
 		cursor: pointer;
