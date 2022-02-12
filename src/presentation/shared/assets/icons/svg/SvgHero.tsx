@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const SvgHero = (props: React.SVGProps<SVGSVGElement>) => {
+export const SvgHero = () => {
 	return (
 		<svg width="18px" height="27px" viewBox="0 0 18 27" version="1.1">
 			<title>ic_heroi</title>
