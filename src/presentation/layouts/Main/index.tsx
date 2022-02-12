@@ -1,7 +1,5 @@
 import React from 'react'
-import { Wrapper, Text } from 'presentation/shared/components'
-
-import IconHero from 'presentation/shared/assets/icons/ic_heroi.svg'
+import { Wrapper, Text, HeroCard } from 'presentation/shared/components'
 
 import * as S from './styles'
 import Button from 'presentation/shared/components/Button'
@@ -27,6 +25,14 @@ export const Main = () => {
 						</Button>
 					</S.MenuOptions>
 				</S.Menu>
+
+				<S.Main>
+					<ul>
+						<li>
+							<HeroCard />
+						</li>
+					</ul>
+				</S.Main>
 			</S.Container>
 		</Wrapper>
 	)

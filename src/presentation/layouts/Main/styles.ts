@@ -5,6 +5,7 @@ export const Container = styled.div`
 	display: flex;
 	width: 100%;
 	margin-top: 6rem;
+	flex-direction: column;
 `
 
 export const Menu = styled.div`
@@ -19,4 +20,19 @@ export const Menu = styled.div`
 export const MenuOptions = styled.div`
 	display: flex;
 	align-items: center;
+`
+
+export const Main = styled.main`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	ul {
+		width: 100%;
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		grid-gap: 24px;
+		list-style: none;
+		align-items: start;
+	}
 `
