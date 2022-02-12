@@ -3,7 +3,7 @@ import React from 'react'
 import * as S from './styles'
 
 export type TextProps = {
-	color?: 'primary' | 'gray'
+	color?: 'primary' | 'gray' | 'lightGray'
 	size?:
 		| 'xlarge'
 		| 'xsmall'
@@ -14,7 +14,7 @@ export type TextProps = {
 		| 'xxsmall'
 		| 'xxlarge'
 		| 'xxxlarge'
-	fontWeight?: 100 | 200 | 300 | 500 | 600
+	fontWeight?: 100 | 200 | 400 | 300 | 500 | 600
 	lineHeight?: string | number
 	as?: React.ElementType
 	children: React.ReactNode

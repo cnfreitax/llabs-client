@@ -8,7 +8,7 @@ export const Heading = styled('h1').attrs<TextProps>(({ as }) => ({
 	${({ color, size, fontWeight = 700, lineHeight = 1.5 }) => css`
 		color: ${theme.colors[color || 'primary']};
 		font-size: ${theme.font.sizes[size || 'medium']};
-		fontweight: ${fontWeight};
-		lineheight: ${lineHeight};
+		font-weight: ${fontWeight};
+		line-height: ${lineHeight};
 	`}
 `
