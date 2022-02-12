@@ -31,7 +31,8 @@ export default {
 	colors: {
 		primary: '#ff0000',
 		gray: '#4A4A4A',
-		lightRed: '#ff00001c'
+		lightRed: '#ff00001c',
+		lightGray: '#bcc2be'
 	},
 	transition: {
 		default: '0.3s ease-in-out',
