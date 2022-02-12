@@ -2,6 +2,8 @@ import styled, { css } from 'styled-components'
 
 export const Form = styled('form')`
 	width: 100%;
+	display: flex;
+	justify-content: center;
 `
 export const Input = styled.label`
 	${({ theme }) => css`
