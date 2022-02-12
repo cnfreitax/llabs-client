@@ -5,10 +5,19 @@ export const Wrapper = styled.div`
 	display: flex;
 	width: 100%;
 	font-size: 16px;
-	padding: 24px 14px;
+	position: relative;
+
+	footer {
+		position: fixed;
+		height: 16px;
+		background: ${({ theme }) => theme.colors.primary};
+		width: 100%;
+		bottom: 0;
+	}
 `
 export const Content = styled.div`
 	display: flex;
+	padding: 24px 14px;
 	flex: 1;
 	margin: 0 auto;
 	width: 100%;

@@ -14,6 +14,8 @@ export const Wrapper = ({ children }: Props) => {
 
 				{children}
 			</S.Content>
+
+			<footer>{''}</footer>
 		</S.Wrapper>
 	)
 }
