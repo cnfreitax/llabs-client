@@ -30,6 +30,8 @@ export default {
 	},
 	colors: {
 		primary: '#ff0000',
+		white: '#ffffff',
+		secondary: '#E2F0E1',
 		gray: '#4A4A4A',
 		lightRed: '#ff00001c',
 		lightGray: '#bcc2be'

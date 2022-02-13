@@ -1,12 +1,18 @@
 import styled from 'styled-components'
 
-export const Wrapper = styled.div`
+import { WrapperProps } from '.'
+
+type Props = Pick<WrapperProps, 'bgColor'>
+
+export const Wrapper = styled.div<Props>`
 	flex: 1;
 	display: flex;
+	min-height: 100vh;
+	align-items: flex-start;
 	width: 100%;
 	font-size: 16px;
 	position: relative;
-
+	background: ${({ bgColor, theme }) => theme.colors[bgColor || 'white']}};
 	footer {
 		position: fixed;
 		height: 16px;
@@ -15,6 +21,7 @@ export const Wrapper = styled.div`
 		bottom: 0;
 	}
 `
+
 export const Content = styled.div`
 	display: flex;
 	padding: 24px 14px;

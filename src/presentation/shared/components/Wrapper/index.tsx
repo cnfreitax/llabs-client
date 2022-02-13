@@ -1,17 +1,19 @@
+import theme from 'presentation/styles/theme'
 import React, { ReactNode } from 'react'
 import { Header } from '../Header'
 import * as S from './styles'
 
-type Props = {
+export type WrapperProps = {
 	children: ReactNode
 	withText?: boolean
+	bgColor?: keyof typeof theme.colors
 }
 
-export const Wrapper = ({ children }: Props) => {
+export const Wrapper = ({ children, withText, bgColor }: WrapperProps) => {
 	return (
-		<S.Wrapper>
+		<S.Wrapper bgColor={bgColor}>
 			<S.Content>
-				<Header />
+				<Header withText={withText} />
 
 				{children}
 			</S.Content>
