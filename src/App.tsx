@@ -4,14 +4,12 @@ import { Main } from 'presentation/layouts/Main'
 import theme from 'presentation/styles/theme'
 import { ThemeProvider } from 'styled-components'
 import { MoviesProvider } from 'presentation/context/heros'
-import { HeroDetailsLayout } from 'presentation/layouts/HeroDetail'
 
 function App() {
 	return (
 		<ThemeProvider theme={theme}>
 			<MoviesProvider>
-				{/* <Main /> */}
-				<HeroDetailsLayout />
+				<Main />
 			</MoviesProvider>
 			<GlobalStyles />
 		</ThemeProvider>

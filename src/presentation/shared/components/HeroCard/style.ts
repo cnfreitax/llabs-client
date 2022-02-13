@@ -1,7 +1,9 @@
 import styled from 'styled-components'
 
-export const CardContainer = styled.div`
-	width: 170px;
+import { CardProps } from '.'
+
+export const CardContainer = styled.div<CardProps>`
+	width: ${({ size }) => (size === 'large' ? 170 : 120)}px;
 
 	.info {
 		margin-top: 12px;
