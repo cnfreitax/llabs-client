@@ -21,7 +21,7 @@ export const Header = () => {
 
 				<Text size="small" color="gray" as="span">
 					Mergulhe no domínio deslumbrante de todos os personagens clássicos que
-					você ama - e aqueles que você descubrirá em breve!
+					você ama - e aqueles que você descubrira em breve!
 				</Text>
 
 				<SearchForm />
