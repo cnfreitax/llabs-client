@@ -3,7 +3,7 @@ import React from 'react'
 import * as S from './styles'
 
 export type TextProps = {
-	color?: 'primary' | 'gray' | 'lightGray'
+	color?: 'primary' | 'gray' | 'lightGray' | 'gray200'
 	size?:
 		| 'xlarge'
 		| 'xsmall'

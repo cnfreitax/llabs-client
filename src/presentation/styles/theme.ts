@@ -23,7 +23,7 @@ export default {
 			small: '1em',
 			medium: '1.125em',
 			large: '1.5em',
-			xlarge: '2em',
+			xlarge: '1.8em',
 			xxlarge: '3em',
 			xxxlarge: '3.5em'
 		}
@@ -33,6 +33,7 @@ export default {
 		white: '#ffffff',
 		secondary: '#E2F0E1',
 		gray: '#4A4A4A',
+		gray200: '#A6A4A4',
 		lightRed: '#ff00001c',
 		lightGray: '#bcc2be'
 	},
