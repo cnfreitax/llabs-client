@@ -9,6 +9,7 @@ export const Wrapper = styled.header<Props>`
 	justify-content: center;
 	align-items: center;
 	flex-direction: ${({ withText }) => withText && 'column'};
+	margin-bottom: 4rem;
 
 	.header-info {
 		margin-top: 1.3rem;
