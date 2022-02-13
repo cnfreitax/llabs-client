@@ -4,6 +4,7 @@ import * as S from './styles'
 
 type Props = {
 	children: ReactNode
+	withText?: boolean
 }
 
 export const Wrapper = ({ children }: Props) => {

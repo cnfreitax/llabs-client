@@ -4,7 +4,7 @@ export const InputWrapper = styled.label`
 	${({ theme }) => css`
 		width: 100%;
 		max-width: 820px;
-		margin-top: 4rem;
+		/* margin-top: 4rem; */
 		height: 5rem;
 		border-radius: ${theme.border.radius.inputRound};
 		padding: 0 25px;
