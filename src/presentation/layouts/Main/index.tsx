@@ -5,8 +5,22 @@ import * as S from './styles'
 import Button from 'presentation/shared/components/Button'
 import { SvgHero } from 'presentation/shared/assets/icons/svg/SvgHero'
 import { SvgHearth } from 'presentation/shared/assets/icons/svg/SvgHearth'
+import { generateHashApi } from 'infra/utils/generateHashApi'
+import axios from 'axios'
 
 export const Main = () => {
+	React.useEffect(() => {
+		;(async () => {
+			const { hash, timeNow } = generateHashApi()
+
+			const response = await axios.get(
+				`${process.env.REACT_APP_API_URL}characters?ts=${timeNow}&apikey=${process.env.REACT_APP_PUBLIC_KEY_MARVEL_API}&hash=${hash}`
+			)
+
+			console.log(response)
+		})()
+	}, [])
+
 	return (
 		<Wrapper>
 			<S.Container>
