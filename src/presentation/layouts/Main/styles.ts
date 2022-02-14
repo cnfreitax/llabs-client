@@ -4,7 +4,7 @@ export const Container = styled.div`
 	flex: 1;
 	display: flex;
 	width: 100%;
-	margin-top: 6rem;
+	margin-top: 44px;
 	flex-direction: column;
 `
 
@@ -26,13 +26,13 @@ export const Main = styled.main`
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	flex-direction: column;
 
 	ul {
 		width: 100%;
 		display: grid;
 		grid-template-columns: repeat(4, 1fr);
-		grid-gap: 24px;
+		grid-gap: 40px;
 		list-style: none;
-		align-items: start;
 	}
 `
