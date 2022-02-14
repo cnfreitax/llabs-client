@@ -67,7 +67,7 @@ export const HeroDetailsLayout = () => {
 						Últimos lançamentos
 					</Text>
 
-					<S.ComicList>
+					{/* <S.ComicList>
 						<li>
 							<HeroCard size="medium" />
 						</li>
@@ -91,7 +91,7 @@ export const HeroDetailsLayout = () => {
 						<li>
 							<HeroCard size="medium" />
 						</li>
-					</S.ComicList>
+					</S.ComicList> */}
 				</S.DivComic>
 			</S.Content>
 		</Wrapper>

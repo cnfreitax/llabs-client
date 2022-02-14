@@ -15,8 +15,7 @@ export default class ApiRepository<Model = any>
 
 	async get(data: RepositoryRequest): Promise<ApiResponse<Model>> {
 		return this.apiClient.request({
-			...data,
-			method: ApiMethod.GET
+			...data
 		})
 	}
 }

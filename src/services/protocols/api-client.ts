@@ -1,8 +1,10 @@
 export type ApiRequest = {
-	url: string
-	method: ApiMethod
-	body?: any
-	headers?: any
+	// url: string
+	// method: ApiMethod
+	// body?: any
+	// headers?: any
+
+	route: string
 }
 
 export interface ApiClient<R = any> {

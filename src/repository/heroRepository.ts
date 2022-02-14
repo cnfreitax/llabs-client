@@ -1,4 +1,5 @@
 import { IGetHeros } from 'domain/usecases'
+import { generateHashApi } from 'infra/utils/generateHashApi'
 import { ApiStatusCode } from 'services/protocols/api-client'
 import { IApiRepository } from 'services/protocols/apiRepository'
 import { HeroReporisotyProtocol } from './protocols/hero-protocol'
@@ -8,10 +9,10 @@ export class HeroRepository implements HeroReporisotyProtocol {
 
 	async load(): Promise<IGetHeros.Model> {
 		const { apiRepository } = this
+		const { hash, timeNow } = generateHashApi()
 
 		const httpResponse = await apiRepository.get({
-			// mudar a api
-			url: `COLORCAR API MARVEL`
+			route: 'characters'
 		})
 
 		if (

@@ -5,5 +5,9 @@ export interface IGetHeros {
 }
 
 export namespace IGetHeros {
-	export type Model = Array<Hero>
+	export type Model = {
+		data: {
+			results: Array<Hero>
+		}
+	}
 }

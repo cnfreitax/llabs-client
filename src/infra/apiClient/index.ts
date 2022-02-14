@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from 'axios'
+import { generateHashApi } from 'infra/utils/generateHashApi'
 import {
 	ApiClient,
 	ApiRequest,
@@ -8,13 +9,12 @@ import {
 export default class ApiClientImplementation implements ApiClient {
 	async request(data: ApiRequest): Promise<ApiResponse> {
 		let axiosResponse: AxiosResponse
+
 		try {
-			axiosResponse = await axios.request({
-				url: data.url,
-				method: data.method,
-				data: data.body,
-				headers: data.headers
-			})
+			const { hash, timeNow } = generateHashApi()
+			axiosResponse = await axios.get(
+				`${process.env.REACT_APP_API_URL}${data.route}?ts=${timeNow}&apikey=${process.env.REACT_APP_PUBLIC_KEY_MARVEL_API}&hash=${hash}`
+			)
 		} catch (err: any) {
 			axiosResponse = err.response
 		}

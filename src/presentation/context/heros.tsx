@@ -1,46 +1,61 @@
 import React from 'react'
-// import { Hero } from 'domain/protocols/hero'
-
+import { Hero } from 'domain/protocols/hero'
+import useServices from 'presentation/hooks/useService'
 type HeroContext = {
-	state: {
-		// movies: Array<Hero>
-		isLoading: boolean
-	}
-	// getAllHeros: () => Promise<void>
+	heroes: Array<Hero>
+	isLoading: boolean
+	getHeroes: () => Promise<void>
 }
 
-export const HerosContext = React.createContext<HeroContext>({
-	state: {
-		isLoading: false
-	}
+export const HeroesContext = React.createContext<HeroContext>({
+	heroes: [],
+	isLoading: false,
+	getHeroes: async () => undefined
 })
 
-export function MoviesProvider({ children }: { children: React.ReactNode }) {
-	// const [heros, setHeros] = React.useState<Hero[]>([])
+export function HeoresProvider({ children }: { children: React.ReactNode }) {
+	const [heroes, setHeroes] = React.useState<Hero[]>([])
 	// const [totalResults, setTotalResults] = React.useState(0)
 	const [isLoading, setIsLoading] = React.useState<boolean>(false)
-	// const movieService = useServices().movie
+	const heroService = useServices().hero
 
-	const providerValues = React.useMemo(() => {
-		return {
-			state: {
-				isLoading
-			}
+	const getHeroes = async () => {
+		try {
+			setIsLoading(true)
+			const response = await heroService.getHeros()
+			setHeroes(response.data.results)
+		} catch (error) {
+			console.log(error)
+
+			return
+		} finally {
+			setIsLoading(false)
 		}
-	}, [isLoading])
+	}
+
+	// const providerValues = React.useMemo(() => {
+	// 	return {
+	// 		state: {
+	// 			isLoading,
+	// 			heroes
+	// 		},
+	// 		getHeroes
+	// 	}
+	// }, [isLoading, heroes, getHeroes])
 
 	return (
-		<HerosContext.Provider value={providerValues}>
+		<HeroesContext.Provider value={{ isLoading, heroes, getHeroes }}>
 			{children}
-		</HerosContext.Provider>
+		</HeroesContext.Provider>
 	)
 }
 
-// function useHeros(): HeroContext {
-// 	if (HerosContext) {
-// 		return React.useContext(HerosContext)
-// 	}
-// 	return React.useContext(HerosContext)
-// }
+function useHeroes(): HeroContext {
+	const context = React.useContext(HeroesContext)
+	if (!context) {
+		throw new Error('useHeroes muste be used with a HeroesProvider')
+	}
+	return context
+}
 
-// export default useHeros
+export default useHeroes

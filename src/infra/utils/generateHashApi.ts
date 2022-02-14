@@ -6,9 +6,11 @@ type GenerateHashApi = {
 }
 
 export const generateHashApi = (): GenerateHashApi => {
-	const timeNow = Number(new Date())
+	const timeNow = new Date().getTime()
+
 	const pk = process.env.REACT_APP_PUBLIC_KEY_MARVEL_API || 'LOCAL'
-	const hash = md5(timeNow + pk + process.env?.REACT_APP_PRIVATE_KEY_MARVEL_API)
+	const sk = process.env?.REACT_APP_PRIVATE_KEY_MARVEL_API || 'LOCAL'
+	const hash = md5(timeNow + sk + pk)
 
 	return {
 		timeNow,

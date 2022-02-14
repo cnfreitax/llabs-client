@@ -1,9 +1,10 @@
 import { ApiResponse } from './api-client'
 
 export type RepositoryRequest = {
-	url: string
+	url?: string
 	body?: any
 	headers?: any
+	route: string
 }
 
 export interface IApiRepository<T = any> {
