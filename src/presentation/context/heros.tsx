@@ -1,24 +1,30 @@
 import React from 'react'
 import { Hero } from 'domain/protocols/hero'
 import useServices from 'presentation/hooks/useService'
+import { IGetComics } from 'domain/usecases'
+import { Comic } from 'domain/protocols/comic'
+
 type HeroContext = {
 	heroes: Array<Hero>
 	favoritedHeoroes: number[]
 	isLoading: boolean
+	comicsfromSelectedHero: Comic[]
 	getHeroes: () => Promise<void>
 	favoriteHero: (heroId: number) => void
+	getComics: (param: IGetComics.Params) => void
 }
 
-export const HeroesContext = React.createContext<HeroContext>({
-	heroes: [],
-	favoritedHeoroes: [],
-	isLoading: false,
-	getHeroes: async () => undefined,
-	favoriteHero: (_heroId: number) => undefined
-})
+// const objModelReturnIComic = {} as IGetComics.Model
+
+export const HeroesContext = React.createContext<HeroContext>({} as HeroContext)
 
 export function HeoresProvider({ children }: { children: React.ReactNode }) {
 	const [heroes, setHeroes] = React.useState<Hero[]>([])
+
+	const [comicsfromSelectedHero, setComicsFromSelectedHero] = React.useState<
+		Comic[]
+	>([])
+
 	const [isLoading, setIsLoading] = React.useState<boolean>(false)
 	const heroService = useServices().hero
 	const [favoritedHeoroes, setFavoriteHeores] = React.useState<number[]>(() => {
@@ -26,6 +32,18 @@ export function HeoresProvider({ children }: { children: React.ReactNode }) {
 		if (favoriteStorage) return JSON.parse(favoriteStorage)
 		return []
 	})
+
+	const getComics = async (params: IGetComics.Params) => {
+		try {
+			setIsLoading(true)
+			const response = await heroService.getComics(params)
+			setComicsFromSelectedHero(response.data.results)
+		} catch (error) {
+			console.log(error)
+		} finally {
+			setIsLoading(false)
+		}
+	}
 
 	const favoriteHero = (heroId: number): void => {
 		let updatedValueState = []
@@ -86,7 +104,15 @@ export function HeoresProvider({ children }: { children: React.ReactNode }) {
 
 	return (
 		<HeroesContext.Provider
-			value={{ isLoading, heroes, getHeroes, favoriteHero, favoritedHeoroes }}
+			value={{
+				isLoading,
+				heroes,
+				getHeroes,
+				favoriteHero,
+				favoritedHeoroes,
+				getComics,
+				comicsfromSelectedHero
+			}}
 		>
 			{children}
 		</HeroesContext.Provider>

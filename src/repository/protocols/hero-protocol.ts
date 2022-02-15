@@ -1,5 +1,6 @@
-import { IGetHeros } from 'domain/usecases'
+import { IGetComics, IGetHeros } from 'domain/usecases'
 
 export interface HeroReporisotyProtocol {
-	load(): Promise<IGetHeros.Model>
+	loadHeros(): Promise<IGetHeros.Model>
+	loadComics(params: IGetComics.Params): Promise<IGetComics.Model>
 }

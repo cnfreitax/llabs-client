@@ -1,7 +1,8 @@
-import { IGetHeros } from 'domain/usecases'
+import { IGetComics, IGetHeros } from 'domain/usecases'
 
 type Services = {
 	getHeros: IGetHeros
+	getComics: IGetComics
 }
 
 export default class HeroServiceContext {
@@ -9,5 +10,9 @@ export default class HeroServiceContext {
 
 	getHeros(): Promise<IGetHeros.Model> {
 		return this.services.getHeros.load()
+	}
+
+	getComics(params: IGetComics.Params): Promise<IGetComics.Model> {
+		return this.services.getComics.load(params)
 	}
 }
