@@ -12,7 +12,7 @@ export const Wrapper = styled.header<Props>`
 	margin-bottom: 4rem;
 
 	.header-info {
-		margin-top: 1.3rem;
+		margin: 22px 0 33px;
 		text-align: center;
 
 		h1 {
