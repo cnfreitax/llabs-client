@@ -4,13 +4,13 @@ import React from 'react'
 import { Text } from '../Text'
 import * as S from './style'
 
-export const Rating = () => {
+export const Rating = ({ rating }: { rating: number }) => {
 	return (
 		<S.Container>
 			<Text as="span" color="gray" size="xxxsmall">
 				Rating:
 			</Text>
-			<S.Stars ratingHero={4}>
+			<S.Stars ratingHero={rating}>
 				{[...Array(5)].map((star) => (
 					<div key={star}>
 						<SVGRatingStart />

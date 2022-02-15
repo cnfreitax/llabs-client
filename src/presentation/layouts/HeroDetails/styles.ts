@@ -19,10 +19,10 @@ export const DetailsSection = styled.section<DetailProps>`
 	&::before {
 		content: '${({ heroName }) => heroName}';
 		position: absolute;
-		font-size: 34rem;
+		font-size: 24rem;
 		font-weight: 700;
 		color: ${({ theme }) => theme.colors.white};
-		opacity: 0.3;
+		opacity: 0.5;
 		right: 0;
 	}
 

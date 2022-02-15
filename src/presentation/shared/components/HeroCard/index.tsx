@@ -2,6 +2,7 @@ import { Hero } from 'domain/protocols/hero'
 import useHeroes from 'presentation/context/heros'
 import { SvgHearth } from 'presentation/shared/assets/icons/svg/SvgHearth'
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { Text } from '..'
 import Button from '../Button'
 
@@ -19,7 +20,9 @@ export const HeroCard = ({ size, withFavoriteButton, hero }: CardProps) => {
 
 	return (
 		<S.CardContainer size={size}>
-			<S.Card imageURI={formatImageURI} />
+			<Link to="/details" state={{ hero: hero }}>
+				<S.Card imageURI={formatImageURI} />
+			</Link>
 			<div className="info">
 				<Text color="gray" as="span">
 					{hero.name}

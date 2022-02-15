@@ -2,8 +2,8 @@ import React from 'react'
 import {
 	Wrapper,
 	Text,
-	Rating,
-	HeroCard
+	Rating
+	// HeroCard
 } from 'presentation/shared/components/'
 import { SvgHearth } from 'presentation/shared/assets/icons/svg/SvgHearth'
 import IconComic from 'presentation/shared/assets/icons/ic_quadrinhos.svg'
@@ -13,19 +13,33 @@ import Hulk from 'presentation/shared/assets/icons/hulkv.png'
 
 import Button from 'presentation/shared/components/Button'
 import theme from 'presentation/styles/theme'
+import { Hero } from 'domain/protocols/hero'
+import useHeroes from 'presentation/context/heros'
 
-export const HeroDetailsLayout = () => {
+type Props = {
+	hero: Hero
+}
+
+export const HeroDetailsLayout = ({ hero }: Props) => {
+	const { favoriteHero, favoritedHeoroes } = useHeroes()
+
 	return (
 		<Wrapper bgColor="secondary">
 			<S.Content>
-				<S.DetailsSection heroName="Hulk">
+				<S.DetailsSection heroName={hero.name.split(' ')[0]}>
 					<S.DetailsContent>
 						<div className="details-row">
 							<Text size="xlarge" color="gray">
-								HULK
+								{hero.name}
 							</Text>
 
-							<Button icon={<SvgHearth />} noPadding variant="text" />
+							<Button
+								active={favoritedHeoroes.includes(hero.id)}
+								onClick={() => favoriteHero(hero.id)}
+								icon={<SvgHearth />}
+								noPadding
+								variant="text"
+							/>
 						</div>
 
 						<Text
@@ -35,20 +49,23 @@ export const HeroDetailsLayout = () => {
 							color="gray200"
 							lineHeight={1.7}
 						>
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-							eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-							enim ad minim veniam, quis nostrud exercitation ullamco laboris
-							nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-							reprehenderit in voluptate velit esse cillum dolore eu fugiat
-							nulla pariatur.
+							{hero.description || 'Descrição não disponível'}
 						</Text>
 
 						<div className="details-row">
-							<InfoCard label="Quadrinhos" icon={IconComic} amout={3000} />
-							<InfoCard label="Filmes" icon={IconComic} amout={50} />
+							<InfoCard
+								label="Quadrinhos"
+								icon={IconComic}
+								amout={hero.comics.available}
+							/>
+							<InfoCard
+								label="Filmes"
+								icon={IconComic}
+								amout={hero.series.available}
+							/>
 						</div>
 
-						<Rating />
+						<Rating rating={Math.floor(Math.random() * (5 - 1) + 1)} />
 
 						<Text size="xxxsmall" color="gray">
 							Último quadrinho:{' '}
@@ -68,26 +85,6 @@ export const HeroDetailsLayout = () => {
 					</Text>
 
 					{/* <S.ComicList>
-						<li>
-							<HeroCard size="medium" />
-						</li>
-
-						<li>
-							<HeroCard size="medium" />
-						</li>
-
-						<li>
-							<HeroCard size="medium" />
-						</li>
-
-						<li>
-							<HeroCard size="medium" />
-						</li>
-
-						<li>
-							<HeroCard size="medium" />
-						</li>
-
 						<li>
 							<HeroCard size="medium" />
 						</li>
