@@ -22,11 +22,17 @@ export type ButtonProps = {
 } & ButtonTypes
 
 const Button: ForwardRefRenderFunction<S.WrapperProps, ButtonProps> = (
-	{ fullWidth = false, icon: Icon, active, ...props }: ButtonProps,
+	{ fullWidth = false, icon: Icon, active, role, ...props }: ButtonProps,
 	ref
 ) => (
-	<S.Wrapper fullWidth={fullWidth} ref={ref} {...props} active={active}>
-		{Icon && Icon}
+	<S.Wrapper
+		fullWidth={fullWidth}
+		ref={ref}
+		role={role || 'button-role'}
+		{...props}
+		active={active}
+	>
+		{Icon && <div role="button-icon">{Icon}</div>}
 		{!!props.children && <span>{props.children}</span>}
 	</S.Wrapper>
 )
