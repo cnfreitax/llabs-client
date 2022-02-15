@@ -1,42 +1,54 @@
-import { Hero } from 'domain/protocols/hero'
 import useHeroes from 'presentation/context/heros'
 import { SvgHearth } from 'presentation/shared/assets/icons/svg/SvgHearth'
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, LinkProps } from 'react-router-dom'
 import { Text } from '..'
 import Button from '../Button'
 
 import * as S from './style'
 
+type LinkType = LinkProps
+
 export type CardProps = {
 	size?: 'large' | 'medium'
 	withFavoriteButton?: boolean
-	hero: Hero
-}
+	title: string
+	entityIdentifier?: number
+	thumbnailPath: string
+} & LinkType
 
-export const HeroCard = ({ size, withFavoriteButton, hero }: CardProps) => {
+export const HeroCard = ({
+	size,
+	withFavoriteButton,
+	title,
+	to,
+	state,
+	entityIdentifier,
+	thumbnailPath
+}: CardProps) => {
 	const { favoriteHero, favoritedHeoroes } = useHeroes()
-	const formatImageURI = `${hero.thumbnail.path}/standard_xlarge.jpg`
+	const formatImageURI = `${thumbnailPath}/standard_xlarge.jpg`
 
 	return (
 		<S.CardContainer size={size}>
-			<Link to="/details" state={{ hero: hero }}>
+			<Link to={to} state={state}>
 				<S.Card imageURI={formatImageURI} />
 			</Link>
 			<div className="info">
 				<Text color="gray" as="span">
-					{hero.name}
+					{title}
 				</Text>
-				{withFavoriteButton && (
+				{withFavoriteButton && entityIdentifier && (
 					<Button
 						active={
-							favoritedHeoroes.length >= 0 && favoritedHeoroes.includes(hero.id)
+							favoritedHeoroes.length >= 0 &&
+							favoritedHeoroes.includes(entityIdentifier)
 						}
-						onClick={() => favoriteHero(hero.id)}
+						onClick={() => favoriteHero(entityIdentifier)}
 						noPadding
 						variant="text"
 						icon={<SvgHearth />}
-					></Button>
+					/>
 				)}
 			</div>
 		</S.CardContainer>

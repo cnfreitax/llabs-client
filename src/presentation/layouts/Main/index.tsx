@@ -79,12 +79,28 @@ export const MainLayout = ({ heroes, isLoading }: Props) => {
 						{onlyFavorites
 							? listOfFavorites().map((hero) => (
 									<li key={hero.name}>
-										<HeroCard hero={hero} withFavoriteButton size="large" />
+										<HeroCard
+											title={hero.name}
+											to="/details"
+											state={{ hero: hero }}
+											thumbnailPath={hero.thumbnail.path}
+											entityIdentifier={hero.id}
+											withFavoriteButton
+											size="large"
+										/>
 									</li>
 							  ))
 							: formatedList.map((hero) => (
 									<li key={hero.name}>
-										<HeroCard hero={hero} withFavoriteButton size="large" />
+										<HeroCard
+											title={hero.name}
+											to="/details"
+											state={{ hero: hero }}
+											thumbnailPath={hero.thumbnail.path}
+											entityIdentifier={hero.id}
+											withFavoriteButton
+											size="large"
+										/>
 									</li>
 							  ))}
 					</ul>
