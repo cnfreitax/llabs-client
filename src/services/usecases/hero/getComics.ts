@@ -1,8 +1,8 @@
 import { IGetComics } from 'domain/usecases'
-import { HeroRepository } from 'repository/heroRepository'
+import { HeroReporisotyProtocol } from 'repository/protocols/hero-protocol'
 
 export class RemoteGetComics implements IGetComics {
-	constructor(private readonly heroRepository: HeroRepository) {}
+	constructor(private readonly heroRepository: HeroReporisotyProtocol) {}
 
 	async load(data: IGetComics.Params): Promise<IGetComics.Model> {
 		return this.heroRepository.loadComics(data)
