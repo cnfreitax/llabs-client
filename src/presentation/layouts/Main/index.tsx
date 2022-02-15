@@ -1,5 +1,10 @@
 import React from 'react'
-import { Wrapper, Text, HeroCard } from 'presentation/shared/components'
+import {
+	Wrapper,
+	Text,
+	HeroCard,
+	CardLoaderSkeleton
+} from 'presentation/shared/components'
 
 import * as S from './styles'
 import Button from 'presentation/shared/components/Button'
@@ -75,35 +80,39 @@ export const MainLayout = ({ heroes, isLoading }: Props) => {
 						</S.MenuOptions>
 					</S.Menu>
 
-					<ul>
-						{onlyFavorites
-							? listOfFavorites().map((hero) => (
-									<li key={hero.name}>
-										<HeroCard
-											title={hero.name}
-											to="/details"
-											state={{ hero: hero }}
-											thumbnailPath={hero.thumbnail.path}
-											entityIdentifier={hero.id}
-											withFavoriteButton
-											size="large"
-										/>
-									</li>
-							  ))
-							: formatedList.map((hero) => (
-									<li key={hero.name}>
-										<HeroCard
-											title={hero.name}
-											to="/details"
-											state={{ hero: hero }}
-											thumbnailPath={hero.thumbnail.path}
-											entityIdentifier={hero.id}
-											withFavoriteButton
-											size="large"
-										/>
-									</li>
-							  ))}
-					</ul>
+					{isLoading ? (
+						<CardLoaderSkeleton counter={10} />
+					) : (
+						<ul>
+							{onlyFavorites
+								? listOfFavorites().map((hero) => (
+										<li key={hero.name}>
+											<HeroCard
+												title={hero.name}
+												to="/details"
+												state={{ hero: hero }}
+												thumbnailPath={hero.thumbnail.path}
+												entityIdentifier={hero.id}
+												withFavoriteButton
+												size="large"
+											/>
+										</li>
+								  ))
+								: formatedList.map((hero) => (
+										<li key={hero.name}>
+											<HeroCard
+												title={hero.name}
+												to="/details"
+												state={{ hero: hero }}
+												thumbnailPath={hero.thumbnail.path}
+												entityIdentifier={hero.id}
+												withFavoriteButton
+												size="large"
+											/>
+										</li>
+								  ))}
+						</ul>
+					)}
 				</S.Main>
 			</S.Container>
 		</Wrapper>

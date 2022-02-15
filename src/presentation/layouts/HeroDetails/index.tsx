@@ -3,7 +3,8 @@ import {
 	Wrapper,
 	Text,
 	Rating,
-	HeroCard
+	HeroCard,
+	CardLoaderSkeleton
 } from 'presentation/shared/components/'
 import { SvgHearth } from 'presentation/shared/assets/icons/svg/SvgHearth'
 import IconComic from 'presentation/shared/assets/icons/ic_quadrinhos.svg'
@@ -24,7 +25,8 @@ export const HeroDetailsLayout = ({ hero }: Props) => {
 	const {
 		favoriteHero,
 		favoritedHeoroes,
-		comicsfromSelectedHero: comics
+		comicsfromSelectedHero: comics,
+		isLoading
 	} = useHeroes()
 
 	console.log(comics)
@@ -90,17 +92,20 @@ export const HeroDetailsLayout = ({ hero }: Props) => {
 						Últimos lançamentos
 					</Text>
 
+					{isLoading && <CardLoaderSkeleton counter={5} />}
+
 					<S.ComicList>
-						{comics.map((comic) => (
-							<li key={comic.id}>
-								<HeroCard
-									title={comic.title}
-									to="/"
-									thumbnailPath={comic.images[0] && comic.images[0].path}
-									size="medium"
-								/>
-							</li>
-						))}
+						{!isLoading &&
+							comics.map((comic) => (
+								<li key={comic.id}>
+									<HeroCard
+										title={comic.title}
+										to="/"
+										thumbnailPath={comic.images[0] && comic.images[0].path}
+										size="medium"
+									/>
+								</li>
+							))}
 					</S.ComicList>
 				</S.DivComic>
 			</S.Content>
