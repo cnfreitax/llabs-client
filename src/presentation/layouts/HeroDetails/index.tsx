@@ -2,8 +2,8 @@ import React from 'react'
 import {
 	Wrapper,
 	Text,
-	Rating
-	// HeroCard
+	Rating,
+	HeroCard
 } from 'presentation/shared/components/'
 import { SvgHearth } from 'presentation/shared/assets/icons/svg/SvgHearth'
 import IconComic from 'presentation/shared/assets/icons/ic_quadrinhos.svg'
@@ -21,7 +21,13 @@ type Props = {
 }
 
 export const HeroDetailsLayout = ({ hero }: Props) => {
-	const { favoriteHero, favoritedHeoroes } = useHeroes()
+	const {
+		favoriteHero,
+		favoritedHeoroes,
+		comicsfromSelectedHero: comics
+	} = useHeroes()
+
+	console.log(comics)
 
 	return (
 		<Wrapper bgColor="secondary">
@@ -65,7 +71,7 @@ export const HeroDetailsLayout = ({ hero }: Props) => {
 							/>
 						</div>
 
-						<Rating rating={Math.floor(Math.random() * (5 - 1) + 1)} />
+						<Rating rating={getRandomRanting()} />
 
 						<Text size="xxxsmall" color="gray">
 							Último quadrinho:{' '}
@@ -84,11 +90,18 @@ export const HeroDetailsLayout = ({ hero }: Props) => {
 						Últimos lançamentos
 					</Text>
 
-					{/* <S.ComicList>
-						<li>
-							<HeroCard size="medium" />
-						</li>
-					</S.ComicList> */}
+					<S.ComicList>
+						{comics.map((comic) => (
+							<li key={comic.id}>
+								<HeroCard
+									title={comic.title}
+									to="/"
+									thumbnailPath={comic.images[0] && comic.images[0].path}
+									size="medium"
+								/>
+							</li>
+						))}
+					</S.ComicList>
 				</S.DivComic>
 			</S.Content>
 		</Wrapper>
@@ -100,6 +113,8 @@ type PropsCard = {
 	amout: number
 	icon: React.FC
 }
+
+const getRandomRanting = () => Math.floor(Math.random() * (5 - 1) + 1)
 
 const InfoCard = ({ label, icon, amout }: PropsCard) => {
 	return (
