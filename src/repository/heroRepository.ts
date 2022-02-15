@@ -27,7 +27,6 @@ export class HeroRepository implements HeroReporisotyProtocol {
 			// 	}
 			// )
 
-			console.log(httpResponse.body)
 			return httpResponse.body
 		}
 	}

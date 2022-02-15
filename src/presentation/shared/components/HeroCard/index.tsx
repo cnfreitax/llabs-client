@@ -1,5 +1,5 @@
 import { Hero } from 'domain/protocols/hero'
-import { generateHashApi } from 'infra/utils/generateHashApi'
+import useHeroes from 'presentation/context/heros'
 import { SvgHearth } from 'presentation/shared/assets/icons/svg/SvgHearth'
 import React from 'react'
 import { Text } from '..'
@@ -14,20 +14,26 @@ export type CardProps = {
 }
 
 export const HeroCard = ({ size, withFavoriteButton, hero }: CardProps) => {
+	const { favoriteHero, favoritedHeoroes } = useHeroes()
 	const formatImageURI = `${hero.thumbnail.path}/standard_xlarge.jpg`
-
-	console.log(hero)
 
 	return (
 		<S.CardContainer size={size}>
 			<S.Card imageURI={formatImageURI} />
-
 			<div className="info">
 				<Text color="gray" as="span">
 					{hero.name}
 				</Text>
 				{withFavoriteButton && (
-					<Button noPadding variant="text" icon={<SvgHearth />}></Button>
+					<Button
+						active={
+							favoritedHeoroes.length >= 0 && favoritedHeoroes.includes(hero.id)
+						}
+						onClick={() => favoriteHero(hero.id)}
+						noPadding
+						variant="text"
+						icon={<SvgHearth />}
+					></Button>
 				)}
 			</div>
 		</S.CardContainer>

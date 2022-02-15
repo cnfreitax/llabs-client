@@ -13,8 +13,6 @@ type Props = {
 }
 
 export const MainLayout = ({ heroes, isLoading }: Props) => {
-	console.log(heroes)
-
 	return (
 		<Wrapper withText>
 			<S.Container>
