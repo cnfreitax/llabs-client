@@ -7,14 +7,14 @@ type Props = {
 	icon?: string
 } & InputHTMLAttributes<HTMLInputElement>
 
-const Input: React.ForwardRefRenderFunction<HTMLInputElement, Props> = ({
-	placeholder,
-	icon: Icon
-}: Props) => {
+const Input: React.ForwardRefRenderFunction<HTMLInputElement, Props> = (
+	{ placeholder, icon: Icon }: Props,
+	ref
+) => {
 	return (
 		<S.InputWrapper>
 			{Icon && <img src={String(Icon)} alt="Icone de Lupa em vermelho" />}
-			<input type="text" placeholder={placeholder} />
+			<input ref={ref} type="text" placeholder={placeholder} />
 			<BarLoader />
 		</S.InputWrapper>
 	)

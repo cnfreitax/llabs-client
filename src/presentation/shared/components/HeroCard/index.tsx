@@ -15,6 +15,7 @@ export type CardProps = {
 	title: string
 	entityIdentifier?: number
 	thumbnailPath: string
+	role?: string
 } & LinkType
 
 export const HeroCard = ({
@@ -24,13 +25,14 @@ export const HeroCard = ({
 	to,
 	state,
 	entityIdentifier,
-	thumbnailPath
+	thumbnailPath,
+	role
 }: CardProps) => {
 	const { favoriteHero, favoritedHeoroes } = useHeroes()
 	const formatImageURI = `${thumbnailPath}/standard_xlarge.jpg`
 
 	return (
-		<S.CardContainer size={size}>
+		<S.CardContainer size={size} role={role}>
 			<Link to={to} state={state}>
 				<S.Card imageURI={formatImageURI} />
 			</Link>
@@ -41,6 +43,7 @@ export const HeroCard = ({
 				{withFavoriteButton && entityIdentifier && (
 					<Button
 						active={
+							favoritedHeoroes &&
 							favoritedHeoroes.length >= 0 &&
 							favoritedHeoroes.includes(entityIdentifier)
 						}

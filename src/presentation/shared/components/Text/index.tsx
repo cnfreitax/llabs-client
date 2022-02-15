@@ -18,6 +18,7 @@ export type TextProps = {
 	lineHeight?: string | number
 	as?: React.ElementType
 	children: React.ReactNode
+	role?: string
 }
 
 export const Text = ({
@@ -26,10 +27,12 @@ export const Text = ({
 	size,
 	fontWeight,
 	lineHeight,
-	as
+	as,
+	role
 }: TextProps) => {
 	return (
 		<S.Heading
+			role={role}
 			color={color}
 			size={size}
 			fontWeight={fontWeight}

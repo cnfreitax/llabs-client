@@ -55,12 +55,19 @@ export const MainLayout = ({ heroes, isLoading }: Props) => {
 			<S.Container>
 				<S.Main>
 					<S.Menu>
-						<Text color="lightGray" as="span" fontWeight={400} size="small">
+						<Text
+							role="text-heroes-amount"
+							color="lightGray"
+							as="span"
+							fontWeight={400}
+							size="small"
+						>
 							Encontrados {heroes.length} heróis
 						</Text>
 
 						<S.MenuOptions>
 							<Button
+								role="action-button-list"
 								onClick={() => handleWithSwitchOrder()}
 								variant="text"
 								icon={<SvgHero />}
@@ -70,6 +77,7 @@ export const MainLayout = ({ heroes, isLoading }: Props) => {
 							</Button>
 
 							<Button
+								role="action-button-list"
 								onClick={() => handleSelectFavorites()}
 								variant="text"
 								icon={<SvgHearth />}
@@ -81,13 +89,14 @@ export const MainLayout = ({ heroes, isLoading }: Props) => {
 					</S.Menu>
 
 					{isLoading ? (
-						<CardLoaderSkeleton counter={10} />
+						<CardLoaderSkeleton role="skeleton-loading" counter={10} />
 					) : (
-						<ul>
+						<ul role="ul-heroes-list">
 							{onlyFavorites
 								? listOfFavorites().map((hero) => (
 										<li key={hero.name}>
 											<HeroCard
+												role="hero-card"
 												title={hero.name}
 												to="/details"
 												state={{ hero: hero }}
@@ -101,6 +110,7 @@ export const MainLayout = ({ heroes, isLoading }: Props) => {
 								: formatedList.map((hero) => (
 										<li key={hero.name}>
 											<HeroCard
+												role="hero-card"
 												title={hero.name}
 												to="/details"
 												state={{ hero: hero }}
