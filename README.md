@@ -1,7 +1,7 @@
 # Link da aplicação: https://cnfreitax.github.io/llabs-client/
 
 ## Requisitos Atendidos:
-- Listagem de personagens an home
+- Listagem de personagens na home
 - Possibilidade de ordenação ASC/DESC
 - Filtro por nome
 - Favoritar até 05 personagens e poder filtrar apenas os favoritos
