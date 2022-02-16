@@ -5,7 +5,6 @@ import { IGetComics } from 'domain/usecases'
 import { Comic } from 'domain/protocols/comic'
 import { toast } from 'react-toastify'
 import { toastProps } from 'main/config/toastOptions'
-import { clearTimeout } from 'timers'
 import { debounce } from 'infra/utils/debouce'
 
 type HeroContext = {
