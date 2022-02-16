@@ -31,6 +31,8 @@
 		"@typescript-eslint"
 	],
 	"rules": {
+		"prefer-rest-params": "off",
+		"@typescript-eslint/no-this-alias": "off",
 		"@typescript-eslint/no-extra-semi": "off",
 		"@typescript-eslint/no-namespace": "off",
 		"@typescript-eslint/explicit-module-boundary-types": "off",

@@ -5,6 +5,8 @@ import { IGetComics } from 'domain/usecases'
 import { Comic } from 'domain/protocols/comic'
 import { toast } from 'react-toastify'
 import { toastProps } from 'main/config/toastOptions'
+import { clearTimeout } from 'timers'
+import { debounce } from 'infra/utils/debouce'
 
 type HeroContext = {
 	heroes: Array<Hero>
@@ -40,11 +42,15 @@ export function HeoresProvider({ children }: { children: React.ReactNode }) {
 	})
 
 	const findHeroByName = (name: string) => {
-		const resultHeroByName = heroes.filter(
-			(hero) => !hero.name.toLowerCase().search(name.toLowerCase())
-		)
+		const returnHero = () => {
+			const resultHeroByName = heroes.filter(
+				(hero) => !hero.name.toLowerCase().search(name.toLowerCase())
+			)
 
-		setHeroesFilteresByName(resultHeroByName)
+			setHeroesFilteresByName(resultHeroByName)
+		}
+
+		return debounce(returnHero, 1000)
 	}
 
 	const getComics = async (params: IGetComics.Params) => {
