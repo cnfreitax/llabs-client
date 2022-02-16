@@ -29,8 +29,6 @@ export const HeroDetailsLayout = ({ hero }: Props) => {
 		isLoading
 	} = useHeroes()
 
-	console.log(comics)
-
 	return (
 		<Wrapper bgColor="secondary">
 			<S.Content>

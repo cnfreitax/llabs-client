@@ -3,7 +3,6 @@ import { Hero } from 'domain/protocols/hero'
 import { HeroDetailsLayout } from 'presentation/layouts/HeroDetails'
 import { useLocation } from 'react-router-dom'
 import useHeroes from 'presentation/context/heros'
-import { Comic } from 'domain/protocols/comic'
 
 type LocationType = {
 	state: {

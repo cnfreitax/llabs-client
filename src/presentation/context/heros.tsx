@@ -4,6 +4,7 @@ import useServices from 'presentation/hooks/useService'
 import { IGetComics } from 'domain/usecases'
 import { Comic } from 'domain/protocols/comic'
 import { toast } from 'react-toastify'
+import { toastProps } from 'main/config/toastOptions'
 
 type HeroContext = {
 	heroes: Array<Hero>
@@ -36,9 +37,16 @@ export function HeoresProvider({ children }: { children: React.ReactNode }) {
 		try {
 			setIsLoading(true)
 			const response = await heroService.getComics(params)
-			setComicsFromSelectedHero(response.data.results)
+			const result = response.data.results
+			const orderByReleaseDate = result.sort((a, b) =>
+				// eslint-disable-next-line
+				// @ts-ignore: Unreachable code error
+				Math.abs(new Date(b.dates[0].date) - new Date(a.dates[0].date))
+			)
+
+			setComicsFromSelectedHero(orderByReleaseDate.slice(0, 10))
 		} catch (error) {
-			console.log(error)
+			toast.error('Número máximo de favoritos excedido', toastProps)
 		} finally {
 			setIsLoading(false)
 		}
@@ -61,15 +69,7 @@ export function HeoresProvider({ children }: { children: React.ReactNode }) {
 				)
 			} else {
 				if (parsedValue.length >= 5) {
-					toast.warn('Número máximo de favoritos excedido', {
-						position: 'top-right',
-						autoClose: 5000,
-						hideProgressBar: false,
-						closeOnClick: true,
-						pauseOnHover: true,
-						draggable: true,
-						progress: undefined
-					})
+					toast.warn('Número máximo de favoritos excedido', toastProps)
 					return
 				}
 

@@ -1,5 +1,5 @@
 type ComicDate = {
-	date: Date
+	date: string
 	type: 'onsaleDate' | 'focDate'
 }
 
