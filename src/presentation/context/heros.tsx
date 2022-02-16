@@ -15,8 +15,6 @@ type HeroContext = {
 	getComics: (param: IGetComics.Params) => void
 }
 
-// const objModelReturnIComic = {} as IGetComics.Model
-
 export const HeroesContext = React.createContext<HeroContext>({} as HeroContext)
 
 export function HeoresProvider({ children }: { children: React.ReactNode }) {

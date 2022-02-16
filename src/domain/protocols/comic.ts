@@ -1,6 +1,6 @@
 type ComicDate = {
 	date: Date
-	typ: 'onsaleDate' | 'focDate'
+	type: 'onsaleDate' | 'focDate'
 }
 
 export type ComicImages = {
