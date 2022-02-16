@@ -1,0 +1,38 @@
+import React from 'react'
+
+import * as S from './styles'
+
+export const BarLoader = () => {
+	return (
+		<S.LoadginWrapper>
+			<svg width="30" height="50" viewBox="0 0 87 50" fill="none">
+				<g id="loader_bars">
+					<g id="upperbar">
+						<rect id="1_2" width="50" height="10" rx="5" fill="#FF72C6" />
+					</g>
+					<g id="middlebar">
+						<rect
+							id="Rectangle 2"
+							x="20"
+							y="18"
+							width="50"
+							height="10"
+							rx="5"
+							fill="#FF3AB0"
+						/>
+					</g>
+					<g id="bottombar">
+						<rect
+							id="3_2"
+							y="36"
+							width="50"
+							height="10"
+							rx="5"
+							fill="#FD0098"
+						/>
+					</g>
+				</g>
+			</svg>
+		</S.LoadginWrapper>
+	)
+}
