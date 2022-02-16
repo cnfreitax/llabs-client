@@ -98,7 +98,7 @@ export const MainLayout = ({ heroes, isLoading }: Props) => {
 											<HeroCard
 												role="hero-card"
 												title={hero.name}
-												to="/details"
+												to="details"
 												state={{ hero: hero }}
 												thumbnailPath={hero.thumbnail.path}
 												entityIdentifier={hero.id}
@@ -113,7 +113,7 @@ export const MainLayout = ({ heroes, isLoading }: Props) => {
 											<HeroCard
 												role="hero-card"
 												title={hero.name}
-												to="/details"
+												to="details"
 												state={{ hero: hero }}
 												thumbnailPath={hero.thumbnail.path}
 												entityIdentifier={hero.id}
@@ -127,7 +127,7 @@ export const MainLayout = ({ heroes, isLoading }: Props) => {
 											<HeroCard
 												role="hero-card"
 												title={hero.name}
-												to="/details"
+												to="details"
 												state={{ hero: hero }}
 												thumbnailPath={hero.thumbnail.path}
 												entityIdentifier={hero.id}

@@ -77,11 +77,14 @@ export const HeroDetailsLayout = ({ hero }: Props) => {
 						<Text size="xxxsmall" color="gray">
 							Último quadrinho:{' '}
 							<span style={{ color: theme.colors.gray200 }}>
-								{new Date(comics[0].dates[0].date).toLocaleDateString('pt-BR', {
-									day: 'numeric',
-									month: 'short',
-									year: 'numeric'
-								})}
+								{new Date(comics[0]?.dates[0].date).toLocaleDateString(
+									'pt-BR',
+									{
+										day: 'numeric',
+										month: 'short',
+										year: 'numeric'
+									}
+								)}
 							</span>
 						</Text>
 					</S.DetailsContent>

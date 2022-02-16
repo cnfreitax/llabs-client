@@ -1,15 +1,17 @@
+import React from 'react'
 import { HeroDetailsPage } from 'presentation/pages/HeroDetails'
 import { MainPage } from 'presentation/pages/Main'
-import React from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { Routes, Route, HashRouter } from 'react-router-dom'
 
 export const RoutesAPP = () => {
 	return (
-		<BrowserRouter>
+		<HashRouter>
 			<Routes>
-				<Route index element={<MainPage />} />
-				<Route path="/details" element={<HeroDetailsPage />} />
+				<Route path="/">
+					<Route index element={<MainPage />} />
+					<Route path="/details" element={<HeroDetailsPage />} />
+				</Route>
 			</Routes>
-		</BrowserRouter>
+		</HashRouter>
 	)
 }
