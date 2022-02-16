@@ -8,12 +8,14 @@ import { toastProps } from 'main/config/toastOptions'
 
 type HeroContext = {
 	heroes: Array<Hero>
+	heroesFilteresByName: Array<Hero>
 	favoritedHeoroes: number[]
 	isLoading: boolean
 	comicsfromSelectedHero: Comic[]
 	getHeroes: () => Promise<void>
 	favoriteHero: (heroId: number) => void
 	getComics: (param: IGetComics.Params) => void
+	findHeroByName: (name: string) => void
 }
 
 export const HeroesContext = React.createContext<HeroContext>({} as HeroContext)
@@ -27,11 +29,23 @@ export function HeoresProvider({ children }: { children: React.ReactNode }) {
 
 	const [isLoading, setIsLoading] = React.useState<boolean>(false)
 	const heroService = useServices().hero
+	const [heroesFilteresByName, setHeroesFilteresByName] = React.useState<
+		Hero[]
+	>([])
+
 	const [favoritedHeoroes, setFavoriteHeores] = React.useState<number[]>(() => {
 		const favoriteStorage = localStorage.getItem('marvel_heros_favorite')
 		if (favoriteStorage) return JSON.parse(favoriteStorage)
 		return []
 	})
+
+	const findHeroByName = (name: string) => {
+		const resultHeroByName = heroes.filter(
+			(hero) => !hero.name.toLowerCase().search(name.toLowerCase())
+		)
+
+		setHeroesFilteresByName(resultHeroByName)
+	}
 
 	const getComics = async (params: IGetComics.Params) => {
 		try {
@@ -113,7 +127,9 @@ export function HeoresProvider({ children }: { children: React.ReactNode }) {
 				favoriteHero,
 				favoritedHeoroes,
 				getComics,
-				comicsfromSelectedHero
+				comicsfromSelectedHero,
+				findHeroByName,
+				heroesFilteresByName
 			}}
 		>
 			{children}

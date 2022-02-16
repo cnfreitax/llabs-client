@@ -22,7 +22,7 @@ export const MainLayout = ({ heroes, isLoading }: Props) => {
 	const [orderList, setOrderList] = React.useState<'ASC' | 'DESC'>('ASC')
 	const [onlyFavorites, setOnlyFavorites] = React.useState<boolean>(false)
 
-	const { favoritedHeoroes } = useHeroes()
+	const { favoritedHeoroes, heroesFilteresByName } = useHeroes()
 
 	const formatedList = React.useMemo(() => {
 		if (orderList === 'ASC') {
@@ -92,7 +92,22 @@ export const MainLayout = ({ heroes, isLoading }: Props) => {
 						<CardLoaderSkeleton role="skeleton-loading" counter={10} />
 					) : (
 						<ul role="ul-heroes-list">
-							{onlyFavorites
+							{heroesFilteresByName.length > 0
+								? heroesFilteresByName.map((hero) => (
+										<li key={hero.name}>
+											<HeroCard
+												role="hero-card"
+												title={hero.name}
+												to="/details"
+												state={{ hero: hero }}
+												thumbnailPath={hero.thumbnail.path}
+												entityIdentifier={hero.id}
+												withFavoriteButton
+												size="large"
+											/>
+										</li>
+								  ))
+								: onlyFavorites
 								? listOfFavorites().map((hero) => (
 										<li key={hero.name}>
 											<HeroCard
