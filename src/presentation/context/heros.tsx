@@ -60,7 +60,7 @@ export function HeoresProvider({ children }: { children: React.ReactNode }) {
 
 			setComicsFromSelectedHero(orderByReleaseDate.slice(0, 10))
 		} catch (error) {
-			toast.error('Número máximo de favoritos excedido', toastProps)
+			toast.error('Erro ao carregar quadrinhos', toastProps)
 		} finally {
 			setIsLoading(false)
 		}
@@ -110,8 +110,7 @@ export function HeoresProvider({ children }: { children: React.ReactNode }) {
 			const response = await heroService.getHeros()
 			setHeroes(response.data.results)
 		} catch (error) {
-			console.log(error)
-
+			toast.error('Erro ao carregar heróis', toastProps)
 			return
 		} finally {
 			setIsLoading(false)
