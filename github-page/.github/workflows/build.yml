@@ -17,8 +17,13 @@ jobs:
         run: |
           npm ci
           npm run build
+				env:
+        	REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
+        	REACT_APP_PUBLIC_KEY_MARVEL_API: ${{ secrets.REACT_APP_PUBLIC_KEY_MARVEL_API }}
+        	REACT_APP_PRIVATE_KEY_MARVEL_API: ${{ secrets.REACT_APP_PRIVATE_KEY_MARVEL_API }}
       - name: Deploy to gh-pages
         uses: cnfreitax/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build
+
