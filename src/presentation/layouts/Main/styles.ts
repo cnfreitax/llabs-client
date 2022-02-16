@@ -15,11 +15,19 @@ export const Menu = styled.div`
 	width: 100%;
 	padding: 8px 0;
 	justify-content: space-between;
+	@media only screen and (max-width: 698px) {
+		flex-direction: column;
+	}
 `
 
 export const MenuOptions = styled.div`
 	display: flex;
 	align-items: center;
+
+	@media only screen and (max-width: 698px) {
+		width: 100%;
+		flex-direction: column;
+	}
 `
 
 export const Main = styled.main`
@@ -31,7 +39,7 @@ export const Main = styled.main`
 	ul {
 		width: 100%;
 		display: grid;
-		grid-template-columns: repeat(4, 1fr);
+		grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
 		grid-gap: 40px;
 		list-style: none;
 	}

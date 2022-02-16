@@ -12,7 +12,7 @@ const Input: React.ForwardRefRenderFunction<HTMLInputElement, Props> = (
 	{ placeholder, icon: Icon }: Props,
 	ref
 ) => {
-	const { findHeroByName } = useHeroes()
+	const { findHeroByName, isLoading } = useHeroes()
 
 	return (
 		<S.InputWrapper>
@@ -23,7 +23,7 @@ const Input: React.ForwardRefRenderFunction<HTMLInputElement, Props> = (
 				placeholder={placeholder}
 				onChange={(e) => findHeroByName(e.target.value)}
 			/>
-			<BarLoader />
+			{isLoading && <BarLoader />}
 		</S.InputWrapper>
 	)
 }
