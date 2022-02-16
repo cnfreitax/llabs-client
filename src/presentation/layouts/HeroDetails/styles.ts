@@ -31,6 +31,10 @@ export const DetailsSection = styled.section<DetailProps>`
 		right: 8rem;
 		top: 9px;
 		max-height: 400px;
+
+		@media only screen and (max-width: 529px) {
+			display: none;
+		}
 	}
 `
 
@@ -80,7 +84,7 @@ export const ComicList = styled.ul`
 	margin-top: 40px;
 	width: 100%;
 	display: grid;
-	grid-template-columns: repeat(5, 1fr);
+	grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
 	grid-gap: 24px;
 	list-style: none;
 	align-items: start;

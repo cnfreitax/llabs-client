@@ -3,7 +3,6 @@ import styled, { css } from 'styled-components'
 export const InputWrapper = styled.label`
 	${({ theme }) => css`
 		width: 100%;
-		max-width: 820px;
 		/* margin-top: 4rem; */
 		height: 5rem;
 		border-radius: ${theme.border.radius.inputRound};
@@ -11,7 +10,6 @@ export const InputWrapper = styled.label`
 		display: flex;
 		align-items: center;
 		background: ${theme.colors.lightRed};
-		position: relative;
 
 		input {
 			margin-left: 36px;

@@ -8,6 +8,7 @@ import {
 } from 'presentation/shared/components/'
 import { SvgHearth } from 'presentation/shared/assets/icons/svg/SvgHearth'
 import IconComic from 'presentation/shared/assets/icons/ic_quadrinhos.svg'
+import IconaTraoler from 'presentation/shared/assets/icons/ic_trailer.svg'
 import * as S from './styles'
 
 import Hulk from 'presentation/shared/assets/icons/hulkv.png'
@@ -66,7 +67,7 @@ export const HeroDetailsLayout = ({ hero }: Props) => {
 							/>
 							<InfoCard
 								label="Filmes"
-								icon={IconComic}
+								icon={IconaTraoler}
 								amout={hero.series.available}
 							/>
 						</div>
@@ -75,7 +76,13 @@ export const HeroDetailsLayout = ({ hero }: Props) => {
 
 						<Text size="xxxsmall" color="gray">
 							Último quadrinho:{' '}
-							<span style={{ color: theme.colors.gray200 }}>13 fev. 2020</span>
+							<span style={{ color: theme.colors.gray200 }}>
+								{new Date(comics[0].dates[0].date).toLocaleDateString('pt-BR', {
+									day: 'numeric',
+									month: 'short',
+									year: 'numeric'
+								})}
+							</span>
 						</Text>
 					</S.DetailsContent>
 

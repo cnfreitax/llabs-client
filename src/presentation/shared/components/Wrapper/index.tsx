@@ -18,7 +18,7 @@ export const Wrapper = ({ children, withText, bgColor }: WrapperProps) => {
 				{children}
 			</S.Content>
 
-			<footer>{''}</footer>
+			{/* <footer>{''}</footer> */}
 		</S.Wrapper>
 	)
 }
