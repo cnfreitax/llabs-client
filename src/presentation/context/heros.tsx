@@ -3,6 +3,7 @@ import { Hero } from 'domain/protocols/hero'
 import useServices from 'presentation/hooks/useService'
 import { IGetComics } from 'domain/usecases'
 import { Comic } from 'domain/protocols/comic'
+import { toast } from 'react-toastify'
 
 type HeroContext = {
 	heroes: Array<Hero>
@@ -61,6 +62,19 @@ export function HeoresProvider({ children }: { children: React.ReactNode }) {
 					JSON.stringify(removedByStorage)
 				)
 			} else {
+				if (parsedValue.length >= 5) {
+					toast.warn('Número máximo de favoritos excedido', {
+						position: 'top-right',
+						autoClose: 5000,
+						hideProgressBar: false,
+						closeOnClick: true,
+						pauseOnHover: true,
+						draggable: true,
+						progress: undefined
+					})
+					return
+				}
+
 				const updatedValue = [...JSON.parse(favoriteStorage), heroId]
 
 				localStorage.setItem(
@@ -91,16 +105,6 @@ export function HeoresProvider({ children }: { children: React.ReactNode }) {
 			setIsLoading(false)
 		}
 	}
-
-	// const providerValues = React.useMemo(() => {
-	// 	return {
-	// 		state: {
-	// 			isLoading,
-	// 			heroes
-	// 		},
-	// 		getHeroes
-	// 	}
-	// }, [isLoading, heroes, getHeroes])
 
 	return (
 		<HeroesContext.Provider
