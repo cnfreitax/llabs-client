@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/llabs-client/static/css/main.43c86f1c.css",
+    "main.js": "/llabs-client/static/js/main.95999ab3.js",
+    "static/js/787.ba3e4414.chunk.js": "/llabs-client/static/js/787.ba3e4414.chunk.js",
+    "static/media/hulkv.png": "/llabs-client/static/media/hulkv.b0ad78eb2dfb4dc4aeec.png",
+    "static/media/logo.svg": "/llabs-client/static/media/logo.ff740bb4e56f9ef01f9f1648f589c6b9.svg",
+    "static/media/logo_menor.svg": "/llabs-client/static/media/logo_menor.1c342b9af7efee212ba319e155e542e8.svg",
+    "static/media/ic_quadrinhos.svg": "/llabs-client/static/media/ic_quadrinhos.7e8c32136c710803f430e7ddd731fd6a.svg",
+    "static/media/ic_busca.svg": "/llabs-client/static/media/ic_busca.b6bb5afd20c15b31e38a230e9657f85f.svg",
+    "index.html": "/llabs-client/index.html",
+    "main.43c86f1c.css.map": "/llabs-client/static/css/main.43c86f1c.css.map",
+    "main.95999ab3.js.map": "/llabs-client/static/js/main.95999ab3.js.map",
+    "787.ba3e4414.chunk.js.map": "/llabs-client/static/js/787.ba3e4414.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.43c86f1c.css",
+    "static/js/main.95999ab3.js"
+  ]
+}
