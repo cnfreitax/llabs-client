@@ -1,29 +1,27 @@
-name: deploy
+name: CI
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  workflow_dispatch:
 
 jobs:
-  deploy:
-    runs-on: ubuntu-18.04
+  build:
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: '16.x'
-      - name: Build web-app
-        run: |
-          npm ci
-          npm run build
-				env:
-        	REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
-        	REACT_APP_PUBLIC_KEY_MARVEL_API: ${{ secrets.REACT_APP_PUBLIC_KEY_MARVEL_API }}
-        	REACT_APP_PRIVATE_KEY_MARVEL_API: ${{ secrets.REACT_APP_PRIVATE_KEY_MARVEL_API }}
-      - name: Deploy to gh-pages
-        uses: cnfreitax/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build
 
+      - name: install
+        run: yarn
+
+      - name: build
+        run: yarn build
+
+      - name: deploy
+        uses: JamesIves/github-pages-deploy-action@v4.2.3
+        with:
+          branch: gh-pages
+          folder: ./build
