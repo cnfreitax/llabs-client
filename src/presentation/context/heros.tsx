@@ -9,7 +9,7 @@ import { debounce } from 'infra/utils/debouce'
 
 type HeroContext = {
 	heroes: Array<Hero>
-	heroesFilteresByName: Array<Hero>
+	heroesFilteredByName: Array<Hero>
 	favoritedHeoroes: number[]
 	isLoading: boolean
 	comicsfromSelectedHero: Comic[]
@@ -30,7 +30,7 @@ export function HeoresProvider({ children }: { children: React.ReactNode }) {
 
 	const [isLoading, setIsLoading] = React.useState<boolean>(false)
 	const heroService = useServices().hero
-	const [heroesFilteresByName, setHeroesFilteresByName] = React.useState<
+	const [heroesFilteredByName, setHeroesFilteredByName] = React.useState<
 		Hero[]
 	>([])
 
@@ -46,10 +46,10 @@ export function HeoresProvider({ children }: { children: React.ReactNode }) {
 				(hero) => !hero.name.toLowerCase().search(name.toLowerCase())
 			)
 
-			setHeroesFilteresByName(resultHeroByName)
+			setHeroesFilteredByName(resultHeroByName)
 		}
 
-		return debounce(returnHero, 1000)
+		return debounce(returnHero)
 	}
 
 	const getComics = async (params: IGetComics.Params) => {
@@ -133,7 +133,7 @@ export function HeoresProvider({ children }: { children: React.ReactNode }) {
 				getComics,
 				comicsfromSelectedHero,
 				findHeroByName,
-				heroesFilteresByName
+				heroesFilteredByName
 			}}
 		>
 			{children}
