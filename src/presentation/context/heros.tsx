@@ -41,11 +41,15 @@ export function HeoresProvider({ children }: { children: React.ReactNode }) {
 	})
 
 	const findHeroByName = (name: string) => {
-		const resultHeroByName = heroes.filter(
-			(hero) => !hero.name.toLowerCase().search(name.toLowerCase())
-		)
+		const returnHero = () => {
+			const resultHeroByName = heroes.filter(
+				(hero) => !hero.name.toLowerCase().search(name.toLowerCase())
+			)
 
-		setHeroesFilteredByName(resultHeroByName)
+			setHeroesFilteredByName(resultHeroByName)
+		}
+
+		return debounce(returnHero)
 	}
 
 	const getComics = async (params: IGetComics.Params) => {
