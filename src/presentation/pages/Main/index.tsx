@@ -5,7 +5,7 @@ import React, { useEffect } from 'react'
 export const MainPage = () => {
 	const { getHeroes, heroes, isLoading } = useHeroes()
 	useEffect(() => {
-		getHeroes()
+		getHeroes({})
 	}, [])
 
 	return <MainLayout heroes={heroes} isLoading={isLoading} />

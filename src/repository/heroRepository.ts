@@ -23,11 +23,12 @@ export class HeroRepository implements HeroReporisotyProtocol {
 		}
 	}
 
-	async loadHeros(): Promise<IGetHeros.Model> {
+	async loadHeros(params: IGetHeros.Params): Promise<IGetHeros.Model> {
 		const { apiRepository } = this
 
 		const httpResponse = await apiRepository.get({
-			route: 'characters'
+			route: 'characters',
+			params: params
 		})
 
 		if (

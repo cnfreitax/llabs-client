@@ -1,7 +1,7 @@
 import React from 'react'
 import { Hero } from 'domain/protocols/hero'
 import useServices from 'presentation/hooks/useService'
-import { IGetComics } from 'domain/usecases'
+import { IGetComics, IGetHeros } from 'domain/usecases'
 import { Comic } from 'domain/protocols/comic'
 import { toast } from 'react-toastify'
 import { toastProps } from 'main/config/toastOptions'
@@ -13,7 +13,7 @@ type HeroContext = {
 	favoritedHeoroes: number[]
 	isLoading: boolean
 	comicsfromSelectedHero: Comic[]
-	getHeroes: () => Promise<void>
+	getHeroes: (params: IGetHeros.Params) => Promise<void>
 	favoriteHero: (heroId: number) => void
 	getComics: (param: IGetComics.Params) => void
 	findHeroByName: (name: string) => void
@@ -109,10 +109,10 @@ export function HeoresProvider({ children }: { children: React.ReactNode }) {
 		setFavoriteHeores(updatedValueState)
 	}
 
-	const getHeroes = async () => {
+	const getHeroes = async (params: IGetHeros.Params) => {
 		try {
 			setIsLoading(true)
-			const response = await heroService.getHeros()
+			const response = await heroService.getHeros(params)
 			setHeroes(response.data.results)
 		} catch (error) {
 			toast.error('Erro ao carregar heróis', toastProps)

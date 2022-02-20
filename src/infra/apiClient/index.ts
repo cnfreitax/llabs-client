@@ -15,9 +15,7 @@ export default class ApiClientImplementation implements ApiClient {
 			axiosResponse = await axios.get(
 				`${process.env.REACT_APP_API_URL}${data.route}?ts=${timeNow}&apikey=${process.env.REACT_APP_PUBLIC_KEY_MARVEL_API}&hash=${hash}`,
 				{
-					params: {
-						offset: 1200
-					}
+					params: data.params
 				}
 			)
 		} catch (err: any) {
