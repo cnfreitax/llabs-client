@@ -12,6 +12,7 @@ export namespace IGetHeros {
 	export type Model = {
 		data: {
 			results: Array<Hero>
+			total: number
 		}
 	}
 }

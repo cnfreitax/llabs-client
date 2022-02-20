@@ -12,6 +12,7 @@ type HeroContext = {
 	heroesFilteredByName: Array<Hero>
 	favoritedHeoroes: number[]
 	isLoading: boolean
+	totalPages: number
 	comicsfromSelectedHero: Comic[]
 	getHeroes: (params: IGetHeros.Params) => Promise<void>
 	favoriteHero: (heroId: number) => void
@@ -23,7 +24,7 @@ export const HeroesContext = React.createContext<HeroContext>({} as HeroContext)
 
 export function HeoresProvider({ children }: { children: React.ReactNode }) {
 	const [heroes, setHeroes] = React.useState<Hero[]>([])
-
+	const [totalPages, setTotalPages] = React.useState<number>(0)
 	const [comicsfromSelectedHero, setComicsFromSelectedHero] = React.useState<
 		Comic[]
 	>([])
@@ -113,7 +114,10 @@ export function HeoresProvider({ children }: { children: React.ReactNode }) {
 		try {
 			setIsLoading(true)
 			const response = await heroService.getHeros(params)
-			setHeroes(response.data.results)
+			const { total, results } = response.data
+
+			setHeroes(results)
+			setTotalPages(Math.floor(total / 20))
 		} catch (error) {
 			toast.error('Erro ao carregar heróis', toastProps)
 			return
@@ -126,6 +130,7 @@ export function HeoresProvider({ children }: { children: React.ReactNode }) {
 		<HeroesContext.Provider
 			value={{
 				isLoading,
+				totalPages,
 				heroes,
 				getHeroes,
 				favoriteHero,

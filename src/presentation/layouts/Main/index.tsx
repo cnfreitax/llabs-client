@@ -12,13 +12,22 @@ import { SvgHero } from 'presentation/shared/assets/icons/svg/SvgHero'
 import { SvgHearth } from 'presentation/shared/assets/icons/svg/SvgHearth'
 import { Hero } from 'domain/protocols/hero'
 import useHeroes from 'presentation/context/heros'
+import {
+	Pagination,
+	PaginationProps
+} from 'presentation/shared/components/Pagination'
 
 type Props = {
 	heroes: Array<Hero>
 	isLoading: boolean
-}
+} & PaginationProps
 
-export const MainLayout = ({ heroes, isLoading }: Props) => {
+export const MainLayout = ({
+	heroes,
+	isLoading,
+	totalPages,
+	onChange
+}: Props) => {
 	const [orderList, setOrderList] = React.useState<'ASC' | 'DESC'>('ASC')
 	const [onlyFavorites, setOnlyFavorites] = React.useState<boolean>(false)
 
@@ -139,6 +148,7 @@ export const MainLayout = ({ heroes, isLoading }: Props) => {
 						</ul>
 					)}
 				</S.Main>
+				<Pagination onChange={onChange} totalPages={totalPages} />
 			</S.Container>
 		</Wrapper>
 	)
