@@ -81,7 +81,6 @@ export function HeoresProvider({ children }: { children: React.ReactNode }) {
 			if (
 				parsedValue.filter((item) => item.id === selectedHero.id).length > 0
 			) {
-				console.log('aqui')
 				const removedByStorage = [...parsedValue].filter(
 					(item) => item.id !== selectedHero.id
 				)

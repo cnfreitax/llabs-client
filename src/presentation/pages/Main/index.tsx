@@ -4,7 +4,6 @@ import React, { useEffect } from 'react'
 
 export const MainPage = () => {
 	const { getHeroes, heroes, isLoading, totalPages } = useHeroes()
-	console.log(totalPages)
 	useEffect(() => {
 		getHeroes({})
 	}, [])
