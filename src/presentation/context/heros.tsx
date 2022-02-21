@@ -41,13 +41,32 @@ export function HeoresProvider({ children }: { children: React.ReactNode }) {
 		return []
 	})
 
-	const findHeroByName = (name: string) => {
-		const returnHero = () => {
-			const resultHeroByName = heroes.filter(
+	const findHeroByName = async (name: string) => {
+		let searchResult: Array<Hero> = []
+
+		const returnHero = async () => {
+			const resultHeroByNameOnLoadedHeroes = heroes.filter(
 				(hero) => !hero.name.toLowerCase().search(name.toLowerCase())
 			)
 
-			setHeroesFilteredByName(resultHeroByName)
+			searchResult = resultHeroByNameOnLoadedHeroes
+
+			if (resultHeroByNameOnLoadedHeroes.length <= 0) {
+				try {
+					setIsLoading(true)
+					const response = await heroService.getHeros({
+						name
+					})
+					const { results } = response.data
+					searchResult = results
+				} catch (error) {
+					console.log('error')
+				} finally {
+					setIsLoading(false)
+				}
+			}
+
+			setHeroesFilteredByName(searchResult)
 		}
 
 		return debounce(returnHero)
