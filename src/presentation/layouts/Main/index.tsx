@@ -99,49 +99,10 @@ export const MainLayout = ({
 					) : (
 						<ul role="ul-heroes-list">
 							{heroesFilteredByName && heroesFilteredByName.length > 0
-								? heroesFilteredByName.map((hero) => (
-										<li key={hero.name}>
-											<HeroCard
-												role="hero-card"
-												title={hero.name}
-												to="details"
-												state={{ hero: hero }}
-												thumbnailPath={hero.thumbnail.path}
-												hero={hero}
-												withFavoriteButton
-												size="large"
-											/>
-										</li>
-								  ))
+								? mekaHeroCardList(heroesFilteredByName)
 								: onlyFavorites
-								? favoritedHeoroes.map((hero) => (
-										<li key={hero.name}>
-											<HeroCard
-												role="hero-card"
-												title={hero.name}
-												to="details"
-												state={{ hero: hero }}
-												thumbnailPath={hero.thumbnail.path}
-												hero={hero}
-												withFavoriteButton
-												size="large"
-											/>
-										</li>
-								  ))
-								: formatedList.map((hero) => (
-										<li key={hero.name}>
-											<HeroCard
-												role="hero-card"
-												title={hero.name}
-												to="details"
-												state={{ hero: hero }}
-												thumbnailPath={hero.thumbnail.path}
-												hero={hero}
-												withFavoriteButton
-												size="large"
-											/>
-										</li>
-								  ))}
+								? mekaHeroCardList(favoritedHeoroes)
+								: mekaHeroCardList(formatedList)}
 						</ul>
 					)}
 				</S.Main>
@@ -149,4 +110,20 @@ export const MainLayout = ({
 			</S.Container>
 		</Wrapper>
 	)
+}
+
+const mekaHeroCardList = (heroList: Array<Hero>) => {
+	return heroList.map((hero) => (
+		<HeroCard
+			key={hero.id}
+			role="hero-card"
+			title={hero.name}
+			to="details"
+			state={{ hero: hero }}
+			thumbnailPath={hero.thumbnail.path}
+			hero={hero}
+			withFavoriteButton
+			size="large"
+		/>
+	))
 }
