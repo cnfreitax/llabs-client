@@ -60,7 +60,7 @@ export function HeoresProvider({ children }: { children: React.ReactNode }) {
 					const { results } = response.data
 					searchResult = results
 				} catch (error) {
-					console.log('error')
+					toast.error('Erro ao carregar heróis', toastProps)
 				} finally {
 					setIsLoading(false)
 				}
