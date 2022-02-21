@@ -49,9 +49,6 @@ export const MainLayout = ({
 		}
 	}, [orderList, heroes])
 
-	const listOfFavorites = () =>
-		heroes.filter((hero) => favoritedHeoroes.includes(hero.id))
-
 	const handleWithSwitchOrder = () =>
 		orderList === 'ASC' ? setOrderList('DESC') : setOrderList('ASC')
 
@@ -110,14 +107,14 @@ export const MainLayout = ({
 												to="details"
 												state={{ hero: hero }}
 												thumbnailPath={hero.thumbnail.path}
-												entityIdentifier={hero.id}
+												hero={hero}
 												withFavoriteButton
 												size="large"
 											/>
 										</li>
 								  ))
 								: onlyFavorites
-								? listOfFavorites().map((hero) => (
+								? favoritedHeoroes.map((hero) => (
 										<li key={hero.name}>
 											<HeroCard
 												role="hero-card"
@@ -125,7 +122,7 @@ export const MainLayout = ({
 												to="details"
 												state={{ hero: hero }}
 												thumbnailPath={hero.thumbnail.path}
-												entityIdentifier={hero.id}
+												hero={hero}
 												withFavoriteButton
 												size="large"
 											/>
@@ -139,7 +136,7 @@ export const MainLayout = ({
 												to="details"
 												state={{ hero: hero }}
 												thumbnailPath={hero.thumbnail.path}
-												entityIdentifier={hero.id}
+												hero={hero}
 												withFavoriteButton
 												size="large"
 											/>

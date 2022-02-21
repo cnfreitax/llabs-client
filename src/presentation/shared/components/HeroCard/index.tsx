@@ -1,3 +1,4 @@
+import { Hero } from 'domain/protocols/hero'
 import useHeroes from 'presentation/context/heros'
 import { SvgHearth } from 'presentation/shared/assets/icons/svg/SvgHearth'
 import React from 'react'
@@ -13,9 +14,9 @@ export type CardProps = {
 	size?: 'large' | 'medium'
 	withFavoriteButton?: boolean
 	title: string
-	entityIdentifier?: number
 	thumbnailPath: string
 	role?: string
+	hero?: Hero
 } & LinkType
 
 export const HeroCard = ({
@@ -24,9 +25,9 @@ export const HeroCard = ({
 	title,
 	to,
 	state,
-	entityIdentifier,
 	thumbnailPath,
-	role
+	role,
+	hero
 }: CardProps) => {
 	const { favoriteHero, favoritedHeoroes } = useHeroes()
 	const formatImageURI = `${thumbnailPath}/standard_xlarge.jpg`
@@ -40,14 +41,13 @@ export const HeroCard = ({
 				<Text color="gray" as="span">
 					{title}
 				</Text>
-				{withFavoriteButton && entityIdentifier && (
+				{withFavoriteButton && hero && (
 					<Button
 						active={
-							favoritedHeoroes &&
 							favoritedHeoroes.length >= 0 &&
-							favoritedHeoroes.includes(entityIdentifier)
+							favoritedHeoroes.filter((item) => item.id === hero.id).length > 0
 						}
-						onClick={() => favoriteHero(entityIdentifier)}
+						onClick={() => favoriteHero(hero)}
 						noPadding
 						variant="text"
 						icon={<SvgHearth />}

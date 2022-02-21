@@ -10,12 +10,12 @@ import { debounce } from 'infra/utils/debouce'
 type HeroContext = {
 	heroes: Array<Hero>
 	heroesFilteredByName: Array<Hero>
-	favoritedHeoroes: number[]
+	favoritedHeoroes: Array<Hero>
 	isLoading: boolean
 	totalPages: number
 	comicsfromSelectedHero: Comic[]
 	getHeroes: (params: IGetHeros.Params) => Promise<void>
-	favoriteHero: (heroId: number) => void
+	favoriteHero: (selectedHero: Hero) => void
 	getComics: (param: IGetComics.Params) => void
 	findHeroByName: (name: string) => void
 }
@@ -35,7 +35,7 @@ export function HeoresProvider({ children }: { children: React.ReactNode }) {
 		Hero[]
 	>([])
 
-	const [favoritedHeoroes, setFavoriteHeores] = React.useState<number[]>(() => {
+	const [favoritedHeoroes, setFavoriteHeores] = React.useState<Hero[]>(() => {
 		const favoriteStorage = localStorage.getItem('marvel_heros_favorite')
 		if (favoriteStorage) return JSON.parse(favoriteStorage)
 		return []
@@ -72,15 +72,19 @@ export function HeoresProvider({ children }: { children: React.ReactNode }) {
 		}
 	}
 
-	const favoriteHero = (heroId: number): void => {
+	const favoriteHero = (selectedHero: Hero): void => {
 		let updatedValueState = []
 
 		const favoriteStorage = localStorage.getItem('marvel_heros_favorite')
 		if (favoriteStorage) {
 			const parsedValue = [...JSON.parse(favoriteStorage)]
-
-			if ([...parsedValue].includes(heroId)) {
-				const removedByStorage = [...parsedValue].filter((id) => id !== heroId)
+			if (
+				parsedValue.filter((item) => item.id === selectedHero.id).length > 0
+			) {
+				console.log('aqui')
+				const removedByStorage = [...parsedValue].filter(
+					(item) => item.id !== selectedHero.id
+				)
 				updatedValueState = removedByStorage
 
 				localStorage.setItem(
@@ -93,7 +97,7 @@ export function HeoresProvider({ children }: { children: React.ReactNode }) {
 					return
 				}
 
-				const updatedValue = [...JSON.parse(favoriteStorage), heroId]
+				const updatedValue = [...JSON.parse(favoriteStorage), selectedHero]
 
 				localStorage.setItem(
 					'marvel_heros_favorite',
@@ -103,8 +107,11 @@ export function HeoresProvider({ children }: { children: React.ReactNode }) {
 				updatedValueState = updatedValue
 			}
 		} else {
-			updatedValueState.push(heroId)
-			localStorage.setItem('marvel_heros_favorite', JSON.stringify([heroId]))
+			updatedValueState.push(selectedHero)
+			localStorage.setItem(
+				'marvel_heros_favorite',
+				JSON.stringify([selectedHero])
+			)
 		}
 
 		setFavoriteHeores(updatedValueState)
