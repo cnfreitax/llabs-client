@@ -11,6 +11,7 @@
 - Layout responsivo
 - Utilização de ES6+
 - Utilização de ferramentas para garantir a qualidade do código
+- Listagem de personagems
 - CI/CD.
 
 - alterado error ortográfico no svg logo disponibilizado, **HEROS** para **HEROES**
