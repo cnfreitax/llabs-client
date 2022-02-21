@@ -12,13 +12,22 @@ import { SvgHero } from 'presentation/shared/assets/icons/svg/SvgHero'
 import { SvgHearth } from 'presentation/shared/assets/icons/svg/SvgHearth'
 import { Hero } from 'domain/protocols/hero'
 import useHeroes from 'presentation/context/heros'
+import {
+	Pagination,
+	PaginationProps
+} from 'presentation/shared/components/Pagination'
 
 type Props = {
 	heroes: Array<Hero>
 	isLoading: boolean
-}
+} & PaginationProps
 
-export const MainLayout = ({ heroes, isLoading }: Props) => {
+export const MainLayout = ({
+	heroes,
+	isLoading,
+	totalPages,
+	onChange
+}: Props) => {
 	const [orderList, setOrderList] = React.useState<'ASC' | 'DESC'>('ASC')
 	const [onlyFavorites, setOnlyFavorites] = React.useState<boolean>(false)
 
@@ -39,9 +48,6 @@ export const MainLayout = ({ heroes, isLoading }: Props) => {
 			})
 		}
 	}, [orderList, heroes])
-
-	const listOfFavorites = () =>
-		heroes.filter((hero) => favoritedHeoroes.includes(hero.id))
 
 	const handleWithSwitchOrder = () =>
 		orderList === 'ASC' ? setOrderList('DESC') : setOrderList('ASC')
@@ -93,53 +99,31 @@ export const MainLayout = ({ heroes, isLoading }: Props) => {
 					) : (
 						<ul role="ul-heroes-list">
 							{heroesFilteredByName && heroesFilteredByName.length > 0
-								? heroesFilteredByName.map((hero) => (
-										<li key={hero.name}>
-											<HeroCard
-												role="hero-card"
-												title={hero.name}
-												to="details"
-												state={{ hero: hero }}
-												thumbnailPath={hero.thumbnail.path}
-												entityIdentifier={hero.id}
-												withFavoriteButton
-												size="large"
-											/>
-										</li>
-								  ))
+								? mekaHeroCardList(heroesFilteredByName)
 								: onlyFavorites
-								? listOfFavorites().map((hero) => (
-										<li key={hero.name}>
-											<HeroCard
-												role="hero-card"
-												title={hero.name}
-												to="details"
-												state={{ hero: hero }}
-												thumbnailPath={hero.thumbnail.path}
-												entityIdentifier={hero.id}
-												withFavoriteButton
-												size="large"
-											/>
-										</li>
-								  ))
-								: formatedList.map((hero) => (
-										<li key={hero.name}>
-											<HeroCard
-												role="hero-card"
-												title={hero.name}
-												to="details"
-												state={{ hero: hero }}
-												thumbnailPath={hero.thumbnail.path}
-												entityIdentifier={hero.id}
-												withFavoriteButton
-												size="large"
-											/>
-										</li>
-								  ))}
+								? mekaHeroCardList(favoritedHeoroes)
+								: mekaHeroCardList(formatedList)}
 						</ul>
 					)}
 				</S.Main>
+				<Pagination onChange={onChange} totalPages={totalPages} />
 			</S.Container>
 		</Wrapper>
 	)
+}
+
+const mekaHeroCardList = (heroList: Array<Hero>) => {
+	return heroList.map((hero) => (
+		<HeroCard
+			key={hero.id}
+			role="hero-card"
+			title={hero.name}
+			to="details"
+			state={{ hero: hero }}
+			thumbnailPath={hero.thumbnail.path}
+			hero={hero}
+			withFavoriteButton
+			size="large"
+		/>
+	))
 }

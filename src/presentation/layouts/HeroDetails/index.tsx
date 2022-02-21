@@ -41,8 +41,8 @@ export const HeroDetailsLayout = ({ hero }: Props) => {
 							</Text>
 
 							<Button
-								active={favoritedHeoroes.includes(hero.id)}
-								onClick={() => favoriteHero(hero.id)}
+								active={favoritedHeoroes.includes(hero)}
+								onClick={() => favoriteHero(hero)}
 								icon={<SvgHearth />}
 								noPadding
 								variant="text"

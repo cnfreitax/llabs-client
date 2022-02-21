@@ -5,7 +5,16 @@ import { mockHeroList } from '__test__/mocks/heroes-list'
 import { render, screen, history } from '__test__/test-utils'
 
 const makeSut = ({ isLoading = false }) => {
-	return render(<MainLayout heroes={mockHeroList} isLoading={isLoading} />)
+	const mockFunction = jest.fn()
+
+	return render(
+		<MainLayout
+			totalPages={5}
+			onChange={mockFunction}
+			heroes={mockHeroList}
+			isLoading={isLoading}
+		/>
+	)
 }
 
 describe('<MainLayout />', () => {

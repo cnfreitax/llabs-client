@@ -1,7 +1,7 @@
 import React from 'react'
 import { Hero } from 'domain/protocols/hero'
 import useServices from 'presentation/hooks/useService'
-import { IGetComics } from 'domain/usecases'
+import { IGetComics, IGetHeros } from 'domain/usecases'
 import { Comic } from 'domain/protocols/comic'
 import { toast } from 'react-toastify'
 import { toastProps } from 'main/config/toastOptions'
@@ -10,11 +10,12 @@ import { debounce } from 'infra/utils/debouce'
 type HeroContext = {
 	heroes: Array<Hero>
 	heroesFilteredByName: Array<Hero>
-	favoritedHeoroes: number[]
+	favoritedHeoroes: Array<Hero>
 	isLoading: boolean
+	totalPages: number
 	comicsfromSelectedHero: Comic[]
-	getHeroes: () => Promise<void>
-	favoriteHero: (heroId: number) => void
+	getHeroes: (params: IGetHeros.Params) => Promise<void>
+	favoriteHero: (selectedHero: Hero) => void
 	getComics: (param: IGetComics.Params) => void
 	findHeroByName: (name: string) => void
 }
@@ -23,7 +24,7 @@ export const HeroesContext = React.createContext<HeroContext>({} as HeroContext)
 
 export function HeoresProvider({ children }: { children: React.ReactNode }) {
 	const [heroes, setHeroes] = React.useState<Hero[]>([])
-
+	const [totalPages, setTotalPages] = React.useState<number>(0)
 	const [comicsfromSelectedHero, setComicsFromSelectedHero] = React.useState<
 		Comic[]
 	>([])
@@ -34,7 +35,7 @@ export function HeoresProvider({ children }: { children: React.ReactNode }) {
 		Hero[]
 	>([])
 
-	const [favoritedHeoroes, setFavoriteHeores] = React.useState<number[]>(() => {
+	const [favoritedHeoroes, setFavoriteHeores] = React.useState<Hero[]>(() => {
 		const favoriteStorage = localStorage.getItem('marvel_heros_favorite')
 		if (favoriteStorage) return JSON.parse(favoriteStorage)
 		return []
@@ -71,15 +72,18 @@ export function HeoresProvider({ children }: { children: React.ReactNode }) {
 		}
 	}
 
-	const favoriteHero = (heroId: number): void => {
+	const favoriteHero = (selectedHero: Hero): void => {
 		let updatedValueState = []
 
 		const favoriteStorage = localStorage.getItem('marvel_heros_favorite')
 		if (favoriteStorage) {
 			const parsedValue = [...JSON.parse(favoriteStorage)]
-
-			if ([...parsedValue].includes(heroId)) {
-				const removedByStorage = [...parsedValue].filter((id) => id !== heroId)
+			if (
+				parsedValue.filter((item) => item.id === selectedHero.id).length > 0
+			) {
+				const removedByStorage = [...parsedValue].filter(
+					(item) => item.id !== selectedHero.id
+				)
 				updatedValueState = removedByStorage
 
 				localStorage.setItem(
@@ -92,7 +96,7 @@ export function HeoresProvider({ children }: { children: React.ReactNode }) {
 					return
 				}
 
-				const updatedValue = [...JSON.parse(favoriteStorage), heroId]
+				const updatedValue = [...JSON.parse(favoriteStorage), selectedHero]
 
 				localStorage.setItem(
 					'marvel_heros_favorite',
@@ -102,18 +106,24 @@ export function HeoresProvider({ children }: { children: React.ReactNode }) {
 				updatedValueState = updatedValue
 			}
 		} else {
-			updatedValueState.push(heroId)
-			localStorage.setItem('marvel_heros_favorite', JSON.stringify([heroId]))
+			updatedValueState.push(selectedHero)
+			localStorage.setItem(
+				'marvel_heros_favorite',
+				JSON.stringify([selectedHero])
+			)
 		}
 
 		setFavoriteHeores(updatedValueState)
 	}
 
-	const getHeroes = async () => {
+	const getHeroes = async (params: IGetHeros.Params) => {
 		try {
 			setIsLoading(true)
-			const response = await heroService.getHeros()
-			setHeroes(response.data.results)
+			const response = await heroService.getHeros(params)
+			const { total, results } = response.data
+
+			setHeroes(results)
+			setTotalPages(Math.floor(total / 20))
 		} catch (error) {
 			toast.error('Erro ao carregar heróis', toastProps)
 			return
@@ -126,6 +136,7 @@ export function HeoresProvider({ children }: { children: React.ReactNode }) {
 		<HeroesContext.Provider
 			value={{
 				isLoading,
+				totalPages,
 				heroes,
 				getHeroes,
 				favoriteHero,

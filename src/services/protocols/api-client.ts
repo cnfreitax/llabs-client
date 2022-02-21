@@ -3,8 +3,8 @@ export type ApiRequest = {
 	// method: ApiMethod
 	// body?: any
 	// headers?: any
-
 	route: string
+	params?: Params
 }
 
 export interface ApiClient<R = any> {
@@ -29,14 +29,8 @@ export enum ApiStatusCode {
 	serverError = 500
 }
 
-export type Pagination = {
-	pageSize: number
-	pageNumber: number
-}
-
-export type Interval = {
-	startDate: string
-	endDate: string
+export type Params = {
+	offset?: number
 }
 
 export type ApiResponse<T = any> = {

@@ -8,8 +8,8 @@ type Services = {
 export default class HeroServiceContext {
 	constructor(private readonly services: Services) {}
 
-	getHeros(): Promise<IGetHeros.Model> {
-		return this.services.getHeros.load()
+	getHeros(params: IGetHeros.Params): Promise<IGetHeros.Model> {
+		return this.services.getHeros.load(params)
 	}
 
 	getComics(params: IGetComics.Params): Promise<IGetComics.Model> {

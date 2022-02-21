@@ -5,15 +5,7 @@ import { CardProps } from '.'
 type Props = Pick<CardProps, 'size'>
 
 export const CardContainer = styled.div<Props>`
-	width: ${({ size }) => (size === 'large' ? 170 : 120)}px;
-	/*
-	transition: box-shadow 0.5s;
-
-	&:hover {
-		-moz-box-shadow: 2px 2px rgba(68, 68, 68, 0.6);
-		-webkit-box-shadow: 2px 2px rgba(68, 68, 68, 0.6);
-		box-shadow: 2px 2px rgba(68, 68, 68, 0.6);
-	} */
+	/* width: ${({ size }) => (size === 'large' ? 170 : 120)}px; */
 
 	cursor: pointer;
 	.info {
