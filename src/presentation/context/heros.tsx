@@ -137,6 +137,7 @@ export function HeoresProvider({ children }: { children: React.ReactNode }) {
 
 	const getHeroes = async (params: IGetHeros.Params) => {
 		try {
+			setHeroesFilteredByName([])
 			setIsLoading(true)
 			const response = await heroService.getHeros(params)
 			const { total, results } = response.data

@@ -1,7 +1,7 @@
-export const debounce = (fn: () => void, ms = 1000) => {
+export const debounce = async (fn: () => void, ms = 1000) => {
 	let timeoutId: ReturnType<typeof setTimeout>
 
-	function execute(this: any, ...args: any[]) {
+	async function execute(this: any, ...args: any[]) {
 		clearTimeout(timeoutId)
 		// eslint-disable-next-line
 		// @ts-ignore: Unreachable code error
