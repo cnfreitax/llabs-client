@@ -44,3 +44,11 @@ export const Main = styled.main`
 		list-style: none;
 	}
 `
+
+export const EnpytDiv = styled.div`
+	display: flex;
+	align-items: center;
+	flex: 1;
+	width: 100%;
+	justify-content: center;
+`

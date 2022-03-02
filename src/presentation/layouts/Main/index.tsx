@@ -10,6 +10,7 @@ import * as S from './styles'
 import Button from 'presentation/shared/components/Button'
 import { SvgHero } from 'presentation/shared/assets/icons/svg/SvgHero'
 import { SvgHearth } from 'presentation/shared/assets/icons/svg/SvgHearth'
+import { ReactComponent as EnpytIcon } from 'presentation/shared/assets/icons/ic_enpyt-heroes.svg'
 import { Hero } from 'domain/protocols/hero'
 import useHeroes from 'presentation/context/heros'
 import {
@@ -97,33 +98,50 @@ export const MainLayout = ({
 					{isLoading ? (
 						<CardLoaderSkeleton role="skeleton-loading" counter={10} />
 					) : (
-						<ul role="ul-heroes-list">
+						<>
 							{heroesFilteredByName && heroesFilteredByName.length > 0
 								? mekaHeroCardList(heroesFilteredByName)
 								: onlyFavorites
-								? mekaHeroCardList(favoritedHeoroes)
+								? favoritedSection(favoritedHeoroes)
 								: mekaHeroCardList(formatedList)}
-						</ul>
+						</>
 					)}
 				</S.Main>
-				<Pagination onChange={onChange} totalPages={totalPages} />
+				{!onlyFavorites && (
+					<Pagination onChange={onChange} totalPages={totalPages} />
+				)}
 			</S.Container>
 		</Wrapper>
 	)
 }
 
+const favoritedSection = (favoritedHeoroes: Hero[]) => {
+	return favoritedHeoroes.length > 0 ? (
+		mekaHeroCardList(favoritedHeoroes)
+	) : (
+		<EnpytIcon />
+		// <S.EnpytDiv>
+		// 	<span>Sem Heróis para favoritados</span>
+		// </S.EnpytDiv>
+	)
+}
+
 const mekaHeroCardList = (heroList: Array<Hero>) => {
-	return heroList.map((hero) => (
-		<HeroCard
-			key={hero.id}
-			role="hero-card"
-			title={hero.name}
-			to="details"
-			state={{ hero: hero }}
-			thumbnailPath={hero.thumbnail.path}
-			hero={hero}
-			withFavoriteButton
-			size="large"
-		/>
-	))
+	return (
+		<ul role="ul-heroes-list">
+			{heroList.map((hero) => (
+				<HeroCard
+					key={hero.id}
+					role="hero-card"
+					title={hero.name}
+					to="details"
+					state={{ hero: hero }}
+					thumbnailPath={hero.thumbnail.path}
+					hero={hero}
+					withFavoriteButton
+					size="large"
+				/>
+			))}
+		</ul>
+	)
 }
