@@ -17,7 +17,7 @@ export const CardContainer = styled.div<Props>`
 `
 
 type PorpsCardBackground = {
-	imageURI: string
+	imageURI?: string
 }
 
 export const Card = styled.div<PorpsCardBackground>`

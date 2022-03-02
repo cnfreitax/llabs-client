@@ -120,9 +120,6 @@ const favoritedSection = (favoritedHeoroes: Hero[]) => {
 		mekaHeroCardList(favoritedHeoroes)
 	) : (
 		<EnpytIcon />
-		// <S.EnpytDiv>
-		// 	<span>Sem Heróis para favoritados</span>
-		// </S.EnpytDiv>
 	)
 }
 
@@ -136,7 +133,7 @@ const mekaHeroCardList = (heroList: Array<Hero>) => {
 					title={hero.name}
 					to="details"
 					state={{ hero: hero }}
-					thumbnailPath={hero.thumbnail.path}
+					thumbnailPath={hero.thumbnail?.path}
 					hero={hero}
 					withFavoriteButton
 					size="large"

@@ -14,7 +14,7 @@ export type CardProps = {
 	size?: 'large' | 'medium'
 	withFavoriteButton?: boolean
 	title: string
-	thumbnailPath: string
+	thumbnailPath?: string
 	role?: string
 	hero?: Hero
 } & LinkType
